@@ -1,12 +1,16 @@
 ![Logo](https://github.com/bhdicaire/dnsConfiguration/raw/master/img/logo.png)
 
-Your dns configuration are how you configure your ecosystem. These are mine. [Fork this repository](https://github.com/bhdicaire/dnsConfiguration/fork) and make it your own  managed by git and powered by [StackOverflow's DNSControl](https://github.com/StackExchange/dnscontrol).
+I was a little tired of having hand crafted zone file. DNS Management is hard, especially if you manage thousands of records with several registrars and many DNS providers.
 
-I was a little tired of having hand crafted zone file. DNS Management is hard, especially if you manage thousands of records with several registrars and many DNS providers. 
+I manage DNS configuration with [StackOverflow's DNSControl](https://stackexchange.github.io/dnscontrol/) and [store releases with Git](https://stackexchange.github.io/dnscontrol/release-engineering).
+
+Your DNS configuration is unique as your ecosystem. These are mine. [Fork this repository](https://github.com/bhdicaire/dnsConfiguration/fork) and make it your own.
 
 ## Why would I want my dns configuration on GitHub?
 
-I can easily backup, and restore settings for my personal sites. Furthermore, I can share what I have learned and grab new tricks from the community. I don't believe in security by obscurity. Don't expect to much, this is my opinionated [domain specific language (DSL)](https://stackexchange.github.io/dnscontrol/js) configuration to describe my zones for my own projects. 
+I don't believe in security by obscurity and I :love: Github.
+
+I can easily backup, and restore settings for my personal sites. Furthermore, I can share what I have learned and grab new tricks from the community. Don't expect to much, this is my opinionated [domain specific language (DSL)](https://stackexchange.github.io/dnscontrol/js) configuration to describe my zones for my own projects. 
 
 ## Licence
 
