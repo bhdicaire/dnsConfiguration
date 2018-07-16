@@ -22,21 +22,24 @@ I can easily backup, and restore settings for my personal sites. Furthermore, I 
 ```
 
 4. Create your GO workspace: `mkdir -p $GOPATH $GOPATH/src $GOPATH/pkg $GOPATH/b`
-5. Download the source, compile and install DNSControl: `go get github.com/StackExchange/dnscontrol`
+5. Download the source, compile it, and install DNSControl: `go get github.com/StackExchange/dnscontrol`
 6. Create your dnsControl repository: `mkdir -p ~/Code/dnsConfiguration`
 6. Clone my repository: `git clone https://github.com/bhdicaire/dnsConfiguration ~/Code/dnsConfiguration`
-7. Create your initial `creds.json` with your credentials:
+7. Create your initial Router53 `creds.json` with your own credential:
 
-```{
- "r53_main":{
-      "KeyId": "abc123",
-      "SecretKey": "abc123"
- }
-}
+```
+  {
+     "r53_main":{
+     "KeyId": "abc123",
+     "SecretKey": "abc123"
+     }
+  }
 ```
 8. Modify the `dnsconfig.js` with your providers and DNS zones settings.
- * I'm using AWS Router53 and no registrar
- * Refer to the [service providers list](https://stackexchange.github.io/dnscontrol/provider-list) for more information
+	* I'm using AWS Router53 and no registrar
+	* Refer to the [Documentation](https://stackexchange.github.io/dnscontrol/), especially the [service providers list](https://stackexchange.github.io/dnscontrol/provider-list) 
+9. You can use my Makefile to keep your sanity during emergency change:
+
  * I use the makefile to test and deploy the compiled configurations (e.g. make test or make deploy)
 
 ## Licence
@@ -46,13 +49,13 @@ I can easily backup, and restore settings for my personal sites. Furthermore, I 
 ## Ressources
 
 * [Introducing DNSControl](https://blog.serverfault.com/2017/04/11/introducing-dnscontrol-dns-as-code-has-arrived/)
-* [Documentation](https://stackexchange.github.io/dnscontrol/)
+* 
 * [Repository](https://github.com/StackExchange/dnscontrol)
 * [Presentation](https://www.usenix.org/conference/srecon17americas/program/presentation/peterson)
 
 
  * [DNSControl: DNS as Code from StackOverflow.com](https://www.usenix.org/conference/srecon17americas/program/presentation/peterson)
- * [DNSControl source](https://github.com/StackExchange/dnscontrol)
+
  * Support: 
    *  [Google](https://groups.google.com/forum/#!forum/dnscontrol-discuss)
    * [Gitter](https://gitter.im/dnscontrol/Lobby)
