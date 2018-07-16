@@ -13,32 +13,29 @@ I can easily backup, and restore settings for my personal sites. Furthermore, I 
 
 1. Install Golang with Homebrew: `brew update; brew install golang`
 2. Validate GO version and location (DNSControl can be built with Go version 1.7 or higher): `which go;go version`
-3. Ensure the environment variables are adequate:
+3. Ensure the environment variables are adequate (DNSControl will be installed in $GOPATH/bin):
 ```
-export GOPATH=$HOME/go
-export GOROOT=/usr/local/opt/go/libexec
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin```
+	export GOPATH=$HOME/go
+	export GOROOT=/usr/local/opt/go/libexec
+	export PATH=$PATH:$GOPATH/bin
+	export PATH=$PATH:$GOROOT/bin
 ```
-DNSControl will be installed in $GOPATH/bin :grin:
-4. Create your GO workspace:
 
-```mkdir -p $GOPATH $GOPATH/src $GOPATH/pkg $GOPATH/b```
-5. Download the source, compile and install DNSControl:
-
-```go get github.com/StackExchange/dnscontrol```
-6. Clone my repository
-
-```git clone https://github.com/bhdicaire/dnsConfiguration ~/Code/dnsConfiguration```
-7. Create your initial ```creds.json``` with your credentials:
+4. Create your GO workspace: `mkdir -p $GOPATH $GOPATH/src $GOPATH/pkg $GOPATH/b`
+5. Download the source, compile and install DNSControl: `go get github.com/StackExchange/dnscontrol`
+6. Create your dnsControl repository: `mkdir -p ~/Code/dnsConfiguration`
+6. Clone my repository: `git clone https://github.com/bhdicaire/dnsConfiguration ~/Code/dnsConfiguration`
+7. Create your initial `creds.json` with your credentials:
 
 ```{
  "r53_main":{
       "KeyId": "abc123",
       "SecretKey": "abc123"
  }
-}```
-8. Modify the ```dnsconfig.js``` with your providers and DNS zones settings.
+}
+```
+8. Modify the `dnsconfig.js` with your providers and DNS zones settings.
+ * I'm using AWS Router53 and no registrar
  * Refer to the [service providers list](https://stackexchange.github.io/dnscontrol/provider-list) for more information
  * I use the makefile to test and deploy the compiled configurations (e.g. make test or make deploy)
 
