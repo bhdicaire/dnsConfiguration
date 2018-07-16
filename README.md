@@ -1,8 +1,6 @@
-![Logo](https://github.com/bhdicaire/dnsConfiguration/raw/master/img/logo.png)
+![alt text](https://github.com/bhdicaire/dnsConfiguration/raw/master/img/logo.png "Logo")
 
-I was tired of handling hand crafted zone files. DNS Management is hard, especially if you manage thousands of records with several registrars and many DNS providers.
-
-I manage DNS configuration with [StackOverflow's DNSControl](https://stackexchange.github.io/dnscontrol/) and [store releases with Git](https://stackexchange.github.io/dnscontrol/release-engineering).
+I was tired of handling hand crafted zone files. DNS Management is hard, especially if you manage thousands of records with several registrars and many DNS providers. I manage DNS configuration with [StackOverflow's DNSControl](https://stackexchange.github.io/dnscontrol/) and [store releases with Git](https://stackexchange.github.io/dnscontrol/release-engineering).
 
 Your DNS configuration is unique as your ecosystem. These are mine. [Fork this repository](https://github.com/bhdicaire/dnsConfiguration/fork) and make it your own.
 
@@ -15,9 +13,8 @@ I can easily backup, and restore settings for my personal sites. Furthermore, I 
 
 1. Install Golang with Homebrew:
 
-```brew update```
-
-```brew install golang```
+`brew update`
+`brew install golang`
 2. Validate GO version and location (DNSControl can be built with Go version 1.7 or higher):
 
 ```go version```
@@ -56,7 +53,14 @@ DNSControl will be installed in $GOPATH/bin :grin:
 
 **dnsConfiguration** is licensed by [Benoît H. Dicaire under the MIT License)(https://github.com/bhdicaire/dnsConfiguration/blob//master/LICENCE).
 
-## References
+## Ressources
+
+* [Introducing DNSControl](https://blog.serverfault.com/2017/04/11/introducing-dnscontrol-dns-as-code-has-arrived/)
+* [Documentation](https://stackexchange.github.io/dnscontrol/)
+* [Repository](https://github.com/StackExchange/dnscontrol)
+* [Presentation](https://www.usenix.org/conference/srecon17americas/program/presentation/peterson)
+
+
  * [DNSControl: DNS as Code from StackOverflow.com](https://www.usenix.org/conference/srecon17americas/program/presentation/peterson)
  * [DNSControl source](https://github.com/StackExchange/dnscontrol)
  * Support: 
