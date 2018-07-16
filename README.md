@@ -35,27 +35,23 @@ I can easily backup, and restore settings for my personal sites. Furthermore, I 
      }
   }
 ```
-8. Modify the `dnsconfig.js` with your providers and DNS zones settings.
-	* I'm using AWS Router53 and no registrar
+8. Modify the `dnsconfig.js` with your provider and DNS zones settings:
+	* I'm currently using AWS Route53 and no registrar
 	* Refer to the [Documentation](https://stackexchange.github.io/dnscontrol/), especially the [service providers list](https://stackexchange.github.io/dnscontrol/provider-list) 
-9. You can use my Makefile to keep your sanity during emergency change:
-
- * I use the makefile to test and deploy the compiled configurations (e.g. make test or make deploy)
+9. You can use my Makefile to test and deploy the compiled configuration:
+	* *make test*: 
+	* *make test*: 
+	* *make test*: 
 
 ## Licence
 
-**dnsConfiguration** is licensed by [Benoît H. Dicaire under the MIT License)(https://github.com/bhdicaire/dnsConfiguration/blob//master/LICENCE).
+**dnsConfiguration** is licensed by [Benoît H. Dicaire under the MIT License](https://github.com/bhdicaire/dnsConfiguration/blob//master/LICENCE).
 
 ## Ressources
 
-* [Introducing DNSControl](https://blog.serverfault.com/2017/04/11/introducing-dnscontrol-dns-as-code-has-arrived/)
-* 
-* [Repository](https://github.com/StackExchange/dnscontrol)
-* [Presentation](https://www.usenix.org/conference/srecon17americas/program/presentation/peterson)
+* [Introducing & [Presentation](https://www.usenix.org/conference/srecon17americas/program/presentation/peterson)DNSControl](https://blog.serverfault.com/2017/04/11/introducing-dnscontrol-dns-as-code-has-arrived/)
+* [Source repository](https://github.com/StackExchange/dnscontrol)
 
-
- * [DNSControl: DNS as Code from StackOverflow.com](https://www.usenix.org/conference/srecon17americas/program/presentation/peterson)
-
- * Support: 
-   *  [Google](https://groups.google.com/forum/#!forum/dnscontrol-discuss)
-   * [Gitter](https://gitter.im/dnscontrol/Lobby)
+Support:
+   	* [Gitter](https://gitter.im/dnscontrol/Lobby)
+	* [Google Groups](https://groups.google.com/forum/#!forum/dnscontrol-discuss)
