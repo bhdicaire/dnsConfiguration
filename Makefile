@@ -10,12 +10,18 @@ update:	pull build archive
 ## Variables
 SHELL := /bin/bash
 build_dir := ~/Code/dnsConfiguration
-date := `date +%Y%m%d`
+
 gitRepository := https://github.com/bhdicaire/dnsConfiguration
+configFile := dnsconfig.js
 
 preview:
 	~/go/bin/dnscontrol preview
 
+qa:
+	~/go/bin/dnscontrol version
+	~/go/bin/dnscontrol check
+	~/go/bin/dnscontrol printy-ir
+	
 creds:
 	python -m json.tool creds.json
     
@@ -29,10 +35,11 @@ push:
 	~/go/bin/dnscontrol push
 
 archive:
-	/usr/bin/zip ${build_dir}/${date}-backup
+	export archiveDate `date +%Y%m%d`
+	/usr/bin/zip ${configFile} ${build_dir}/${archiveDate}-backup
 	git add -A
 	git commmit -m"${date} release"
-	git push
+	#git push
 
 clean :
 	#rm -rf ${build_dir}
@@ -40,4 +47,4 @@ clean :
 
 setup:
 	mkdir -p ${build_dir}
-	git clone${gitRepository} ${build_dir}
+	magit clone${gitRepository} ${build_dir}
