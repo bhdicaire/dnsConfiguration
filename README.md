@@ -1,6 +1,6 @@
 ![alt text](https://github.com/bhdicaire/dnsConfiguration/raw/master/img/logo.png "Logo")
 
-I was tired of handling hand crafted zone files. DNS Management is hard, especially if you manage thousands of records with several registrars and many DNS providers. I manage DNS configuration with [StackOverflow's DNSControl](https://stackexchange.github.io/dnscontrol/) and [store releases with Git](https://stackexchange.github.io/dnscontrol/release-engineering).
+I was tired of handling zone files. DNS Management is hard, especially if you manage tons of records with several registrars and many DNS providers. I manage DNS configuration with [StackOverflow's DNSControl](https://stackexchange.github.io/dnscontrol/) and Git.
 
 Your DNS configuration is unique as your ecosystem. These are mine. [Fork this repository](https://github.com/bhdicaire/dnsConfiguration/fork) and make it your own.
 
@@ -8,18 +8,11 @@ Your DNS configuration is unique as your ecosystem. These are mine. [Fork this r
 
 I don't believe in security by obscurity and I :heart: Github.
 
-I can easily backup, and restore settings for my personal sites. Furthermore, I can share what I have learned and grab new tricks from the community. Don't expect too much, this is my opinionated [domain specific language](https://stackexchange.github.io/dnscontrol/js) DNS configuration for my own projects. 
+I can easily backup, and restore settings for my personal sites. Furthermore, I can share what I have learned and grab new tricks from the community. Don't expect too much, this is my opinionated DNS configuration for my own projects. 
 ## Installation
 
-1. Install Golang with Homebrew:
-
-`brew update`
-`brew install golang`
-2. Validate GO version and location (DNSControl can be built with Go version 1.7 or higher):
-
-```go version```
-
-```which go```
+1. Install Golang with Homebrew: `brew update; brew install golang`
+2. Validate GO version and location (DNSControl can be built with Go version 1.7 or higher): `which go;go version`
 3. Ensure the environment variables are adequate:
 ```
 export GOPATH=$HOME/go
