@@ -6,7 +6,7 @@
 
 var REG_NONE = NewRegistrar('none', 'NONE');    // No registrar.
 var R53 = NewDnsProvider('r53_main', 'ROUTE53');
-var O365Tenant = "DicaireStrategies"
+var O365Tenant = "DicaireStrategies-com"
 
 var berlinIP = IP('10.10.10.40')
 var s3Location = "eu-west-1"; // Ireland
@@ -18,7 +18,7 @@ for(var i=100;i<=123;++i){
     stage_subdomains.push( A('*.s'+i+'', '192.0.2.'+i));
 }
 
-var O365SPF = SPF_BUILDER({
+var office365SPF = SPF_BUILDER({
     label: "@",
     overflow: "_spf%d",
     raw: "_rawspf",
@@ -34,15 +34,12 @@ var O365SPF = SPF_BUILDER({
 }
 )
   // 
-var googleMX= [
+var gHost= [
     MX('@', 1, 'aspmx.l.google.com.'),
     MX('@', 5, 'alt1.aspmx.l.google.com.'),
     MX('@', 5, 'alt2.aspmx.l.google.com.'),
     MX('@', 10, 'alt3.aspmx.l.google.com.'),
-    MX('@', 10, 'alt4.aspmx.l.google.com.')
-]
-
-var googleServices = [
+    MX('@', 10, 'alt4.aspmx.l.google.com.'),
     CNAME('calendar', 'ghs.googlehosted.com.'),
     CNAME('drive', 'ghs.googlehosted.com.'),
     CNAME('mail', 'ghs.googlehosted.com.'),
@@ -52,12 +49,10 @@ var googleServices = [
 ]
 
 var gServices = [
-    CNAME('gCalendar', 'ghs.googlehosted.com.'),
-    CNAME('gDrive', 'ghs.googlehosted.com.'),
-    CNAME('gMail', 'ghs.googlehosted.com.'),
-    CNAME('gGroups', 'ghs.googlehosted.com.'),
-    CNAME('gSites', 'ghs.googlehosted.com.'),
-    CNAME('gStart', 'ghs.googlehosted.com.')
+    CNAME('gCalendar', 'calendar.google.com.'),
+    CNAME('gDrive', 'drive.google.com.'),
+    CNAME('gMail', 'mail.google.com.'),
+    CNAME('gGroups', 'groups.google.com.'),
 ]
 
 var office365Tenant = [
@@ -68,7 +63,6 @@ var office365Tenant = [
     CNAME('autodiscover', 'autodiscover.outlook.com.'),
     SRV  ('_sip._tls', 100, 1, 443, 'sipdir.online.lync.com.'),
     SRV  ('_sipfederation._tcp',100, 1, 5061, 'sipfed.online.lync.com.'),
-    CNAME('sip', 'sipdir.online.lync.com.'),
     CNAME('lyncdiscover', 'webdir.online.lync.com.'),
     CNAME('enterpriseregistration', 'enterpriseregistration.windows.net.'),
     CNAME('enterpriseenrollment', 'enterpriseenrollment.manage.microsoft.com.'),   
@@ -79,7 +73,7 @@ var office365Tenant = [
     CNAME('files', O365Tenant + '-files.sharepoint.com.'),
     CNAME('my-files', O365Tenant + '-myfiles.sharepoint.com.'),
     CNAME('my-sharepoint', O365Tenant + '-my.sharepoint.com.'),
-    CNAME('sharepoint', O365Tenant + '-.sharepoint.com.'),
+    CNAME('sharepoint', O365Tenant + '.sharepoint.com.'),
 
     CNAME('autologon', 'autologon.microsoftazuread-sso.com.'),
     CNAME('login-API', 'api.login.microsoftonline.com.'),
@@ -94,7 +88,6 @@ var office365Tenant = [
     CNAME('passwordReset-API', 'api.passwordreset.microsoftonline.com.'),
     CNAME('passwordReset', 'passwordreset.microsoftonline.com.')
 ]
-
 
 
 var office365Services = [
@@ -140,13 +133,16 @@ var office365Services = [
     CNAME('static-sharepoint', 'static.sharepointonline.com.'),
     CNAME('suite', 'suite.office.net.'),
     CNAME('test', 'testConnectivity.microsoft.com.'),
-    CNAME('webshell', 'webshell.suite.office.com')
+    CNAME('webshell', 'webshell.suite.office.com.')
 ]
 
 D('dicairestrategies.com', REG_NONE, DnsProvider(R53),
     DefaultTTL('10m'), 
-    MX("@", 5, "DicaireStrategies-com.mail.protection.outlook.com."),
+    MX("@", 5, O365Tenant + "mail.protection.outlook.com."),
+    office365SPF,
     office365Tenant,
+    office365Services,
+    gServices,
     A('@', '1.2.3.4'),
     CNAME('www', '@'), // 1.2.3.5
     A('server1', '2.3.4.5'),
