@@ -13,7 +13,7 @@ var s3Location = "eu-west-1"; // Ireland
 
 var stage_subdomains = [];
 
-for(var i=100;i<=123;++i){
+for(var i=100;i<=111;++i){
     stage_subdomains.push( A('s'+i+'', '192.0.2.'+i));
     stage_subdomains.push( A('*.s'+i+'', '192.0.2.'+i));
 }
@@ -55,42 +55,23 @@ var gServices = [
     CNAME('gGroups', 'groups.google.com.'),
 ]
 
-var office365Tenant = [
+var office365Core = [
+
+    CNAME('autodiscover', 'autodiscover.outlook.com.'),
+    CNAME('sip','sipdir.online.lync.com.'),
+    SRV  ('_sip._tls', 100, 1, 443, 'sipdir.online.lync.com.'),
+    SRV  ('_sipfederationtls._tcp',100, 1, 5061, 'sipfed.online.lync.com.'),
+    CNAME('lyncdiscover', 'webdir.online.lync.com.'),
+    CNAME('enterpriseregistration', 'enterpriseregistration.windows.net.'),
+    CNAME('enterpriseenrollment', 'enterpriseenrollment.manage.microsoft.com.'), 
+]
+
+var office365Services = [
     CNAME('smtp', 'smtp.office365.com.'),
     CNAME('mail', 'outlook.office365.com.'),
     CNAME('imap', 'outlook.office365.com.'),
     CNAME('pop3', 'outlook.office365.com.'),
-    CNAME('autodiscover', 'autodiscover.outlook.com.'),
-    SRV  ('_sip._tls', 100, 1, 443, 'sipdir.online.lync.com.'),
-    SRV  ('_sipfederation._tcp',100, 1, 5061, 'sipfed.online.lync.com.'),
-    CNAME('lyncdiscover', 'webdir.online.lync.com.'),
-    CNAME('enterpriseregistration', 'enterpriseregistration.windows.net.'),
-    CNAME('enterpriseenrollment', 'enterpriseenrollment.manage.microsoft.com.'),   
-       
-    CNAME('clientconfig', 'clientconfig.microsoftonline-p.net.'),
-    CNAME('companymanager', 'companymanager.microsoftonline.com.'),
-    CNAME('device', 'device.login.microsoftonline.com.'),
-    CNAME('files', O365Tenant + '-files.sharepoint.com.'),
-    CNAME('my-files', O365Tenant + '-myfiles.sharepoint.com.'),
-    CNAME('my-sharepoint', O365Tenant + '-my.sharepoint.com.'),
-    CNAME('sharepoint', O365Tenant + '.sharepoint.com.'),
-
-    CNAME('autologon', 'autologon.microsoftazuread-sso.com.'),
-    CNAME('login-API', 'api.login.microsoftonline.com.'),
-    CNAME('login-p', 'login.microsoftonline-p.com.'),
-    CNAME('login-us', 'login-us.microsoftonline.com.'),
-    CNAME('login', 'login.microsoftonline.com.'),
-    CNAME('loginCERT', 'logincert.microsoftonline.com.'),
-    CNAME('loginEX', 'loginex.microsoftonline.com.'),
-    CNAME('loginMS', 'login.microsoft.com.'),    
-    CNAME('loginO365', 'login.microsoftonline.com.'),
-    CNAME('loginWin', 'login.windows.net.'),
-    CNAME('passwordReset-API', 'api.passwordreset.microsoftonline.com.'),
-    CNAME('passwordReset', 'passwordreset.microsoftonline.com.')
-]
-
-
-var office365Services = [
+    
     CNAME('m', 'outlook.office365.com.'),
     CNAME('outlook', 'outlook.office365.com.'),
 
@@ -111,7 +92,7 @@ var office365Services = [
     CNAME('agent', 'agent.office.net.'),
     CNAME('becws', 'becws.microsoftonline.com.'),
     CNAME('broadcast', 'broadcast.officeapps.live.com.'),
-    CNAME('broadcast', 'broadcast.skype.com.'),
+    CNAME('broadcast-skype', 'broadcast.skype.com.'),
     CNAME('delve-apc', 'apc.delve.office.com.'),
     CNAME('delve-aus', 'aus.delve.office.com.'),
     CNAME('delve-ca', 'can.delve.office.com.'),
@@ -133,26 +114,94 @@ var office365Services = [
     CNAME('static-sharepoint', 'static.sharepointonline.com.'),
     CNAME('suite', 'suite.office.net.'),
     CNAME('test', 'testConnectivity.microsoft.com.'),
-    CNAME('webshell', 'webshell.suite.office.com.')
+    CNAME('webshell', 'webshell.suite.office.com.'),
+
+    CNAME('clientconfig', 'clientconfig.microsoftonline-p.net.'),
+    CNAME('companymanager', 'companymanager.microsoftonline.com.'),
+    CNAME('device', 'device.login.microsoftonline.com.'),
+    CNAME('files', O365Tenant + '-files.sharepoint.com.'),
+    CNAME('my-files', O365Tenant + '-myfiles.sharepoint.com.'),
+    CNAME('my-sharepoint', O365Tenant + '-my.sharepoint.com.'),
+    CNAME('sharepoint', O365Tenant + '.sharepoint.com.'),
+        
+    CNAME('autologon', 'autologon.microsoftazuread-sso.com.'),
+    CNAME('login-API', 'api.login.microsoftonline.com.'),
+    CNAME('login-p', 'login.microsoftonline-p.com.'),
+    CNAME('login-us', 'login-us.microsoftonline.com.'),
+    CNAME('login', 'login.microsoftonline.com.'),
+    CNAME('loginCERT', 'logincert.microsoftonline.com.'),
+    CNAME('loginEX', 'loginex.microsoftonline.com.'),
+    CNAME('loginMS', 'login.microsoft.com.'),    
+    CNAME('loginO365', 'login.microsoftonline.com.'),
+    CNAME('loginWin', 'login.windows.net.'),
+    CNAME('passwordReset-API', 'api.passwordreset.microsoftonline.com.'),
+    CNAME('passwordReset', 'passwordreset.microsoftonline.com.')
 ]
+
+D('infrax.com', REG_NONE, DnsProvider(R53),
+    DefaultTTL('5d'), 
+    MX("@", 5, "infrax-com.mail.protection.outlook.com."),
+    office365SPF,
+    office365Core
+);
 
 D('dicairestrategies.com', REG_NONE, DnsProvider(R53),
     DefaultTTL('10m'), 
-    MX("@", 5, O365Tenant + "mail.protection.outlook.com."),
+    MX("@", 5, O365Tenant + ".mail.protection.outlook.com."),
     office365SPF,
-    office365Tenant,
+    office365Core
+);
+
+D('dstrategies.com', REG_NONE, DnsProvider(R53),
+    DefaultTTL('10m'), 
+    MX("@", 5, O365Tenant + ".mail.protection.outlook.com."),
+    office365SPF,
+    office365Core,
     office365Services,
     gServices,
     A('@', '1.2.3.4'),
-    CNAME('www', '@'), // 1.2.3.5
-    A('server1', '2.3.4.5'),
-    A('robot', berlinIP + 1), 
-    CNAME("assets", "bucket.s3-" + s3Location + ".amazonaws.com."),// 1.2.3.5
+    CNAME('www', '@')
+);
+
+D('bhdicaire.com', REG_NONE, DnsProvider(R53),
+    DefaultTTL('10m'), 
+    MX("@", 5, "bhdicaire-com.mail.protection.outlook.com."),
+    office365SPF,
+    office365Core,
+    A('@', '1.2.3.4'),
+    CNAME('www', '@'),
     CNAME("blog", "gracious-varahamihira-35ff13.netlify.com.")
+);
+
+D('dicaire.com', REG_NONE, DnsProvider(R53),
+    DefaultTTL('10m'), 
+    MX("@", 5, "dicaire-com.mail.protection.outlook.com."),
+    office365SPF,
+    office365Core,
+    office365Services,
+    gServices
+);
+
+
+D('dicai.re', REG_NONE, DnsProvider(R53),
+    DefaultTTL('10m'), 
+    MX("@", 5, "dicai-re.mail.protection.outlook.com."),
+    office365SPF,
+    office365Core
+);
+
+D('coteleblanc.com', REG_NONE, DnsProvider(R53),
+    DefaultTTL('10m'), 
+    MX("@", 5, "coteleblanc-com.mail.protection.outlook.com."),
+    office365SPF,
+    office365Core
 );
 
 //D("dicaire.com", REG_NONE, DnsProvider(R53),
 //    A("www","88.208.252.9"),
 //    A("@","88.208.252.9"),
+//    A('server1', '2.3.4.5'),
+//    A('robot', berlinIP + 1), 
+//    CNAME("assets", "bucket.s3-" + s3Location + ".amazonaws.com."),
 //    stage_subdomains
 //);
