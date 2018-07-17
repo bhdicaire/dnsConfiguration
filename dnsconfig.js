@@ -44,6 +44,17 @@ var office365SPF = SPF_BUILDER({
 }
 )
 
+// Certificate Authority Authorization https://tools.ietf.org/html/rfc6844
+var CAA = [
+  // Allow letsencrypt to issue certificate for this domain
+  CAA("@", "issue", "letsencrypt.org"),
+  CAA("@", "issue", "comodoca.com"),
+  
+  // Allow no CA to issue wildcard certificate for this domain
+  CAA("@", "issuewild", ";"),
+  CAA("@", "iodef", "mailto:CSO@Dicaire.com", CAA_CRITICAL)
+]
+
 var office365Services = [
     CNAME("smtp", "smtp.office365.com."),
     CNAME("mail", "outlook.office365.com."),
@@ -164,7 +175,7 @@ var defaultDomain = [
     "dicairestrategies.com",
 ]
 
-var defaultMX = [
+var defaultDomainMX = [
     "coteleblanc-com",
     "coteleblanc-name",
     "dicai-re",
@@ -175,9 +186,10 @@ for (index in defaultDomain) {
 
     D( defaultDomain[index], REG_NONE, DnsProvider(R53), 
     DefaultTTL("5d"), 
-    MX("@", 5, defaultMX[index] + ".mail.protection.outlook.com."),
+    MX("@", 5, defaultDomainMX[index] + ".mail.protection.outlook.com."),
     office365SPF,
-    office365Core
+    office365Core,
+    CAA
 );
 }
 
