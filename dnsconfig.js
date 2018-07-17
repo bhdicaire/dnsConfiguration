@@ -46,12 +46,10 @@ var office365SPF = SPF_BUILDER({
 
 // Certificate Authority Authorization https://tools.ietf.org/html/rfc6844
 var CAA = [
-  // Allow letsencrypt to issue certificate for this domain
+
   CAA("@", "issue", "letsencrypt.org"),
   CAA("@", "issue", "comodoca.com"),
-  
-  // Allow no CA to issue wildcard certificate for this domain
-  CAA("@", "issuewild", ";"),
+  CAA("@", "issuewild", ";"),   // Allow no CA to issue wildcard certificate for this domain
   CAA("@", "iodef", "mailto:CSO@Dicaire.com", CAA_CRITICAL)
 ]
 
