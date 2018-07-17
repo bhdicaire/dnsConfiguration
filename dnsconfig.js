@@ -2,18 +2,16 @@
    dnscontrol configuration file for DICAIRE.com
 */
 
-// Providers:
-
 var REG_NONE = NewRegistrar('none', 'NONE');    // No registrar.
 var R53 = NewDnsProvider('r53_main', 'ROUTE53');
 var O365Tenant = "DicaireStrategies-com"
 
 var berlinIP = IP('10.10.10.40')
-var s3Location = "eu-west-1"; // Ireland
+var s3Location = "ca-central-1"; 
 
 var stage_subdomains = [];
 
-for(var i=100;i<=111;++i){
+for(var i=100;i<=110;++i){
     stage_subdomains.push( A('s'+i+'', '192.0.2.'+i));
     stage_subdomains.push( A('*.s'+i+'', '192.0.2.'+i));
 }
@@ -142,11 +140,18 @@ D('infrax.com', REG_NONE, DnsProvider(R53),
     DefaultTTL('5d'), 
     MX("@", 5, "infrax-com.mail.protection.outlook.com."),
     office365SPF,
-    office365Core
+    office365Core,
+    A("hplaser","172.16.16.100"),
+    A("mediaz","172.16.16.216"),
+    A("fw","172.16.16.1"),
+    A("edge", berlinIP),
+    A('robot', berlinIP + 1), 
+    CNAME("f", "bucket.s3-" + s3Location + ".amazonaws.com."),
+    stage_subdomains
 );
 
 D('dicairestrategies.com', REG_NONE, DnsProvider(R53),
-    DefaultTTL('10m'), 
+    DefaultTTL('60m'), 
     MX("@", 5, O365Tenant + ".mail.protection.outlook.com."),
     office365SPF,
     office365Core
@@ -174,7 +179,7 @@ D('bhdicaire.com', REG_NONE, DnsProvider(R53),
 );
 
 D('dicaire.com', REG_NONE, DnsProvider(R53),
-    DefaultTTL('10m'), 
+    DefaultTTL('60m'), 
     MX("@", 5, "dicaire-com.mail.protection.outlook.com."),
     office365SPF,
     office365Core,
@@ -184,24 +189,15 @@ D('dicaire.com', REG_NONE, DnsProvider(R53),
 
 
 D('dicai.re', REG_NONE, DnsProvider(R53),
-    DefaultTTL('10m'), 
+    DefaultTTL('60m'), 
     MX("@", 5, "dicai-re.mail.protection.outlook.com."),
     office365SPF,
     office365Core
 );
 
 D('coteleblanc.com', REG_NONE, DnsProvider(R53),
-    DefaultTTL('10m'), 
+    DefaultTTL('5d'), 
     MX("@", 5, "coteleblanc-com.mail.protection.outlook.com."),
     office365SPF,
     office365Core
 );
-
-
-//    A("www","88.208.252.9"),
-//    A("@","88.208.252.9"),
-//    A('server1', '2.3.4.5'),
-//    A('robot', berlinIP + 1), 
-//    CNAME("assets", "bucket.s3-" + s3Location + ".amazonaws.com."),
-//    stage_subdomains
-//);
