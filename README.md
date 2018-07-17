@@ -40,9 +40,9 @@ I can easily backup, and restore settings for my personal sites. Furthermore, I 
 	* Refer to the [Documentation](https://stackexchange.github.io/dnscontrol/), especially the [service providers list](https://stackexchange.github.io/dnscontrol/provider-list) 
 9. You can use my Makefile to test and deploy the compiled configuration:
 	* **make test**: Read live configuration and identify changes to be made, without applying them
-	* *make debug*: git pull, check binary version and location, git status, and check dnsconfig.js & creds.json
-	* *make build*: push update to providers
-	* *make update ticket=abcdef*: git pull, git commit with ticket number, and push update to providers
+	* **make debug**: git pull, check binary version and location, git status, and check dnsconfig.js & creds.json
+	* **make build**: push update to providers
+	* **make update ticket=abcdef**: git pull, git commit with ticket number, and push update to providers
 
 ## Licence
 
@@ -52,4 +52,4 @@ I can easily backup, and restore settings for my personal sites. Furthermore, I 
 
 * [Introducing DNS Control](https://blog.serverfault.com/2017/04/11/introducing-dnscontrol-dns-as-code-has-arrived/) and the [USENIX presentation](https://www.usenix.org/conference/srecon17americas/program/presentation/peterson)
 * [Source repository](https://github.com/StackExchange/dnscontrol)
-* *Support*: [Gitter](https://gitter.im/dnscontrol/Lobby), and [Google Groups](https://groups.google.com/forum/#!forum/dnscontrol-discuss)
+* Support: [Gitter](https://gitter.im/dnscontrol/Lobby), and [Google Groups](https://groups.google.com/forum/#!forum/dnscontrol-discuss)
