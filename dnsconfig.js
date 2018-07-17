@@ -136,6 +136,22 @@ var office365Services = [
     CNAME('passwordReset', 'passwordreset.microsoftonline.com.')
 ]
 
+var mediumCustomDomain = [
+    A('blog', '52.5.181.79'),
+    A('blog', '52.6.3.192'),
+    A('blog', '52.4.38.70'),
+    A('blog', '52.4.240.221'),
+    A('blog', '52.4.225.124'),
+    A('blog', '52.4.175.111'),
+    A('blog', '52.4.145.119'),
+    A('blog', '52.1.173.203'),
+    A('blog', '52.1.147.205'),
+    A('blog', '52.1.119.170'),                
+    A('blog', '52.0.16.118'), 
+    A('blog', '52.6.46.142'),
+    CNAME('6b05fafa072b4760f19c659737547f2f.blog', 'C70B252B0828913873E9D2FA4A427C28B1AAC5FD.comodoca.com.')
+]
+
 D('infrax.com', REG_NONE, DnsProvider(R53),
     DefaultTTL('5d'), 
     MX("@", 5, "infrax-com.mail.protection.outlook.com."),
@@ -143,6 +159,7 @@ D('infrax.com', REG_NONE, DnsProvider(R53),
     office365Core,
     A("hplaser","172.16.16.100"),
     A("mediaz","172.16.16.216"),
+    A("phone","172.16.16.172"),
     A("fw","172.16.16.1"),
     A("edge", berlinIP),
     A('robot', berlinIP + 1), 
@@ -173,14 +190,18 @@ D('bhdicaire.com', REG_NONE, DnsProvider(R53),
     MX("@", 5, "bhdicaire-com.mail.protection.outlook.com."),
     office365SPF,
     office365Core,
+    mediumCustomDomain,
+    A('brand', '1.2.3.4'),
+    CNAME('code', 'bhdicaire.github.com.'),
     A('@', '1.2.3.4'),
-    CNAME('www', '@'),
-    CNAME("blog", "gracious-varahamihira-35ff13.netlify.com.")
+    A('@', '1.2.3.4'),
+    CNAME('www', '@')
 );
 
 D('dicaire.com', REG_NONE, DnsProvider(R53),
     DefaultTTL('60m'), 
     MX("@", 5, "dicaire-com.mail.protection.outlook.com."),
+    TXT("_amazonses","AjQmDhp6xsdy+D+8v2ruK9cDXwxIPlUz5gKejYUwwGs="),
     office365SPF,
     office365Core,
     office365Services,
@@ -198,6 +219,7 @@ D('dicai.re', REG_NONE, DnsProvider(R53),
 D('coteleblanc.com', REG_NONE, DnsProvider(R53),
     DefaultTTL('5d'), 
     MX("@", 5, "coteleblanc-com.mail.protection.outlook.com."),
+//www.facebook.com/genevieve.coteleblanc.coteleblanc.name.
     office365SPF,
     office365Core
 );
