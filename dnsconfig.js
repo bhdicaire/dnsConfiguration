@@ -197,7 +197,7 @@ D('coteleblanc.com', REG_NONE, DnsProvider(R53),
     office365Core
 );
 
-//D("dicaire.com", REG_NONE, DnsProvider(R53),
+
 //    A("www","88.208.252.9"),
 //    A("@","88.208.252.9"),
 //    A('server1', '2.3.4.5'),
