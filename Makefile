@@ -7,7 +7,8 @@ all :	preview
 build:	push
 debug:  pull check preview 
 test:   preview
-update:	pull commit push
+push:	pull commit updateDNS
+ticket:	pull commitTicket updateDNS
 
 ## Variables
 SHELL := /bin/bash
@@ -31,14 +32,19 @@ pull:
 	git pull
 	git status
 
-push:
+updateDNS:
 	~/go/bin/dnscontrol push
 
 commit:
 	git add ${configFile}
-	git commit -m"Update ${dateStamp} DNS configurations with ticket #${ticket}"
+	git commit -m"Update #${dateStamp} ${configFile} — ${msg}"
 	git push
 
+commitTicket:
+	git add ${configFile}
+	git commit -m"Update DNS configurations with ticket #${ticket}"
+	git push
+	
 setup:
 	mkdir -p ${build_dir}
 	git clone${gitRepository} ${build_dir}
