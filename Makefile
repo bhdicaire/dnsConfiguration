@@ -3,12 +3,12 @@
 ## Modified by: Benoît H. Dicaire
 ################################################
 
-all :	preview 
-build:	push
-debug:  pull check preview 
-test:   preview
-push:	pull commit updateDNS
-ticket:	pull commitTicket updateDNS
+all :	     preview 
+build:	     updateDNS
+debug:       pull check preview 
+test:        preview
+push:	     pull commit updateDNS
+push-ticket: pull commitTicket updateDNS
 
 ## Variables
 SHELL := /bin/bash

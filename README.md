@@ -41,8 +41,9 @@ I can easily backup, and restore settings for my personal sites. Furthermore, I 
 9. You can use my Makefile to test and deploy the compiled configuration:
 	* **make test**: Read live configuration and identify changes to be made, without applying them
 	* **make debug**: git pull, check binary version and location, git status, and check dnsconfig.js & creds.json
-	* **make build**: push update to providers
-	* **make update ticket=abcdef**: git pull, git commit with ticket number, and push update to providers
+	* **make build**: push update to DNS providers
+	* **make push msg="add foo.com"**: git pull, git commit with message, and push update to providers
+	* **make push-ticket ticket=abcdef**: git pull, git commit with ticket number, and push update to providers
 
 ## Licence
 
