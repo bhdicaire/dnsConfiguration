@@ -189,9 +189,9 @@ for (index in defaultDomainName) {
 
 D("infrax.com", REG_NONE, DnsProvider(R53),
     DefaultTTL("5d"), 
-    MX("@", 5, "infrax-com.mail.protection.outlook.com."),
+    MX("@", 5, "infrax-com" + ".mail.protection.outlook.com."),
     certificates,
-    CAA("@", "iodef", "mailto:CSO@" + "infrax.com", CAA_CRITICAL),
+    CAA("@", "iodef", "mailto:CSO@" + "Infrax.com", CAA_CRITICAL),
     CAA("@", "issue", "letsencrypt.org"),    
     office365SPF,
     office365Core,
@@ -202,7 +202,7 @@ D("infrax.com", REG_NONE, DnsProvider(R53),
 
 D("dstrategies.com", REG_NONE, DnsProvider(R53),
     DefaultTTL("10m"), 
-    MX("@", 5, O365Tenant + ".mail.protection.outlook.com."),
+    MX("@", 5, "dstrategies-com" + ".mail.protection.outlook.com."),
     certificates,
     CAA("@", "iodef", "mailto:CSO@" + "dStrategies.com", CAA_CRITICAL),    
     office365SPF,
@@ -213,9 +213,22 @@ D("dstrategies.com", REG_NONE, DnsProvider(R53),
     CNAME("www", "@")
 );
 
+D("4lcatraz.com", REG_NONE, DnsProvider(R53),
+    DefaultTTL("10m"), 
+    MX("@", 5, "4lcatraz-com" + ".mail.protection.outlook.com."),
+    certificates,
+    CAA("@", "iodef", "mailto:CSO@" + "4lcatraz.com", CAA_CRITICAL),    
+    office365SPF,
+    office365Core,
+    office365Services,
+    gServices,
+    A("@", "1.2.3.4"),
+    CNAME("www", "@")
+);
+
 D("bhdicaire.com", REG_NONE, DnsProvider(R53),
     DefaultTTL("10m"), 
-    MX("@", 5, "bhdicaire-com.mail.protection.outlook.com."),
+    MX("@", 5, "bhdicaire-com" + ".mail.protection.outlook.com."),
     certificates,
     CAA("@", "iodef", "mailto:CSO@" + "BHDicaire.com", CAA_CRITICAL), 
     CAA("@", "issue", "comodoca.com"),   
@@ -230,7 +243,7 @@ D("bhdicaire.com", REG_NONE, DnsProvider(R53),
 
 D("dicaire.com", REG_NONE, DnsProvider(R53),
     DefaultTTL("60m"), 
-    MX("@", 5, "dicaire-com.mail.protection.outlook.com."),
+    MX("@", 5, "dicaire-com" + ".mail.protection.outlook.com."),
     certificates,
     CAA("@", "iodef", "mailto:CSO@" + "Dicaire.com", CAA_CRITICAL),    
     office365SPF,
