@@ -10,6 +10,15 @@ var berlinIP      = IP("10.10.10.40");
 var dublinSubnet  = IP("10.10.100.");
 var s3Location    = "ca-central-1"; 
 
+var s3Location    = "ca-central-1";
+
+var nameServers = [
+  A("ns1.infrax.com", "205.251.193.2"), // ns-258.awsdns-32.com"
+  A("ns2.infrax.com", "205.251.194.175"), // ns-687.awsdns-21.net"
+  A("ns3.infrax.com", "205.251.196.163"), // ns-1187.awsdns-20.org
+  A("ns4.infrax.com", "205.251.198.41") // ns-1577.awsdns-05.co.uk
+]
+
 var stageDublin = [];
 
 for(var i=1;i<=10;++i){
@@ -135,6 +144,47 @@ var gServices = [
     CNAME("gGroups", "groups.google.com.")
 ]
 
+var awsRegions = [
+    CNAME("aws-ap-northeast-2","ap-northeast-2.amazonaws.com."),
+    CNAME("aws-ap-northeast-3","ap-northeast-3.amazonaws.com."),    
+    CNAME("aws-ap-northeast","ap-northeast-1.amazonaws.com."),
+    CNAME("aws-osaka","ap-northeast-3.amazonaws.com."),
+    CNAME("aws-ap-south","ap-south-1.amazonaws.com."),
+    CNAME("aws-ap-southeast-2","ap-southeast-2.amazonaws.com."),
+    CNAME("aws-ap-southeast","ap-southeast-1.amazonaws.com."),    
+    CNAME("aws-beijing","cn-north-1.amazonaws.com.cn."),
+    CNAME("aws-ca","ca-central-1.amazonaws.com."),
+    CNAME("aws-california","us-west-1.amazonaws.com."),
+    CNAME("aws-cn-north","cn-north-1.amazonaws.com.cn."),
+    CNAME("aws-china","cn-north-1.amazonaws.com.cn."),    
+    CNAME("aws-cn-northwest","cn-northwest-1.amazonaws.com.cn."),
+    CNAME("aws-eu-central","eu-central-1.amazonaws.com."),
+    CNAME("aws-eu-west-2","eu-west-2.amazonaws.com."),
+    CNAME("aws-eu-west-3","eu-west-3.amazonaws.com."),
+    CNAME("aws-eu-west","eu-west-1.amazonaws.com."),   
+    CNAME("aws-ireland","eu-west-1.amazonaws.com."),         
+    CNAME("aws-london","eu-west-2.amazonaws.com."),   
+    CNAME("aws-mtl","ca-central-1.amazonaws.com."), 
+    CNAME("aws-mumbai","ap-south-1.amazonaws.com."),
+    CNAME("aws-ningxia","cn-northwest-1.amazonaws.com.cn."),    
+    CNAME("aws-ohio","us-east-2.amazonaws.com."),    
+    CNAME("aws-paris","eu-west-3.amazonaws.com."), 
+    CNAME("aws-sa-east","sa-east-1.amazonaws.com."),
+    CNAME("aws-saopaulo","sa-east-1.amazonaws.com."),
+    CNAME("aws-seoul","ap-northeast-2.amazonaws.com."),
+    CNAME("aws-singapore","ap-southeast-1.amazonaws.com."),
+    CNAME("aws-sydney","ap-southeast-2.amazonaws.com."),
+    CNAME("aws-tokyo","ap-northeast-1.amazonaws.com."),    
+    CNAME("aws-us-east-2","us-east-2.amazonaws.com."),
+    CNAME("aws-us-east","us-east-1.amazonaws.com."),
+    CNAME("aws-us-west-2","us-west-2.amazonaws.com."),
+    CNAME("aws-oregon","us-west-2.amazonaws.com."),    
+    CNAME("aws-us-west","us-west-1.amazonaws.com."),
+    CNAME("aws-us","us-east-1.amazonaws.com."), 
+    CNAME("aws-virginia","us-east-1.amazonaws.com."),
+    CNAME("aws","ca-central-1.amazonaws.com.")
+]
+
 var mediumCustomDomain = [
     A("blog", "52.5.181.79"),
     A("blog", "52.6.3.192"),
@@ -196,7 +246,7 @@ D("infrax.com", REG_NONE, DnsProvider(R53),
     office365SPF,
     office365Core,
     localDevices,
-    CNAME("f", "bucket.s3-" + s3Location + ".amazonaws.com."),
+
     stageDublin
 );
 
@@ -204,7 +254,7 @@ D("dstrategies.com", REG_NONE, DnsProvider(R53),
     DefaultTTL("10m"), 
     MX("@", 5, "dstrategies-com" + ".mail.protection.outlook.com."),
     certificates,
-    CAA("@", "iodef", "mailto:CSO@" + "dStrategies.com", CAA_CRITICAL),    
+    CAA("@", "iodef", "mailto:CSO@" + "dStrategies.com", CAA_CRITICAL),
     office365SPF,
     office365Core,
     office365Services,
@@ -214,15 +264,15 @@ D("dstrategies.com", REG_NONE, DnsProvider(R53),
 );
 
 D("4lcatraz.com", REG_NONE, DnsProvider(R53),
+    nameServers,
     DefaultTTL("60m"), 
     MX("@", 5, "4lcatraz-com" + ".mail.protection.outlook.com."),
     certificates,
-    CAA("@", "iodef", "mailto:CSO@" + "4lcatraz.com", CAA_CRITICAL),    
+    CAA("@", "iodef", "mailto:CSO@" + "4lcatraz.com", CAA_CRITICAL),
     office365SPF,
     office365Core,
     A("@", "1.2.3.4"),
-    CNAME("www", "@"),
-    TXT("@","MS=ms93681411")
+    CNAME("www", "@")
 );
 
 D("bhdicaire.com", REG_NONE, DnsProvider(R53),
@@ -244,10 +294,12 @@ D("dicaire.com", REG_NONE, DnsProvider(R53),
     DefaultTTL("60m"), 
     MX("@", 5, "dicaire-com" + ".mail.protection.outlook.com."),
     certificates,
-    CAA("@", "iodef", "mailto:CSO@" + "Dicaire.com", CAA_CRITICAL),    
+    CAA("@", "iodef", "mailto:CSO@" + "Dicaire.com", CAA_CRITICAL),
     office365SPF,
     office365Core,
     office365Services,
     gServices,
+    awsRegions,
+    CNAME("s3", "bucket.s3-" + s3Location + ".amazonaws.com."),
     TXT("_amazonses","AjQmDhp6xsdy+D+8v2ruK9cDXwxIPlUz5gKejYUwwGs=")
 );
