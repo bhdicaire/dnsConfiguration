@@ -1,0 +1,6 @@
+{
+ "r53_main":{
+      "KeyId": "abc",
+      "SecretKey": "123"
+ }
+}
