@@ -214,16 +214,15 @@ D("dstrategies.com", REG_NONE, DnsProvider(R53),
 );
 
 D("4lcatraz.com", REG_NONE, DnsProvider(R53),
-    DefaultTTL("10m"), 
+    DefaultTTL("60m"), 
     MX("@", 5, "4lcatraz-com" + ".mail.protection.outlook.com."),
     certificates,
     CAA("@", "iodef", "mailto:CSO@" + "4lcatraz.com", CAA_CRITICAL),    
     office365SPF,
     office365Core,
-    office365Services,
-    gServices,
     A("@", "1.2.3.4"),
-    CNAME("www", "@")
+    CNAME("www", "@"),
+    TXT("@","MS=ms93681411")
 );
 
 D("bhdicaire.com", REG_NONE, DnsProvider(R53),
