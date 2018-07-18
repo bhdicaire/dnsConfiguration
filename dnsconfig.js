@@ -2,30 +2,35 @@
    dnscontrol configuration file for DICAIRE.com
 */
 
-var REG_NONE = NewRegistrar("none", "NONE");    // No registrar.
+var REG_NONE = NewRegistrar("none", "NONE");    // No registrar are currently automated
 var R53 = NewDnsProvider("r53_main", "ROUTE53");
 
-var O365Tenant = "DicaireStrategies-com";
-var berlinIP = IP("10.10.10.40");
-var s3Location = "ca-central-1"; 
+var O365Tenant    = "DicaireStrategies-com";
+var berlinIP      = IP("10.10.10.40");
+var dublinSubnet  = IP("10.10.100.");
+var s3Location    = "ca-central-1"; 
 
-var stage_subdomains = [];
+var stageDublin = [];
 
-for(var i=100;i<=110;++i){
-    stage_subdomains.push( A("s"+i+"", "192.0.2."+i));
-    stage_subdomains.push( A("*.s"+i+"", "192.0.2."+i));
+for(var i=1;i<=10;++i){
+    stageDublin.push( A("dublin"+i+"", dublinSubnet +i));
+    stageDublin.push( A("*.dublin"+i+"", "192.0.2."+i));
 }
 
+// Certificate Authority Authorization https://tools.ietf.org/html/rfc6844
+var certificates= [
+  CAA("@", "issue", "globalsign.com"),
+  CAA("@", "issuewild", ";")
+]
 
 var office365Core = [
-
     CNAME("autodiscover", "autodiscover.outlook.com."),
     CNAME("sip","sipdir.online.lync.com."),
     SRV  ("_sip._tls", 100, 1, 443, "sipdir.online.lync.com."),
     SRV  ("_sipfederationtls._tcp",100, 1, 5061, "sipfed.online.lync.com."),
     CNAME("lyncdiscover", "webdir.online.lync.com."),
     CNAME("enterpriseregistration", "enterpriseregistration.windows.net."),
-    CNAME("enterpriseenrollment", "enterpriseenrollment.manage.microsoft.com."), 
+    CNAME("enterpriseenrollment", "enterpriseenrollment.manage.microsoft.com.")
 ]
 
 var office365SPF = SPF_BUILDER({
@@ -38,20 +43,10 @@ var office365SPF = SPF_BUILDER({
       "include:sendgrid.net",
       "~all"
     ],
-    flatten: [
-      // fill in any domains to inline.
+    flatten: [   // fill in any domains to inline.
     ]
-}
+    }
 )
-
-// Certificate Authority Authorization https://tools.ietf.org/html/rfc6844
-var CAA = [
-
-  CAA("@", "issue", "letsencrypt.org"),
-  CAA("@", "issue", "comodoca.com"),
-  CAA("@", "issuewild", ";"),   // Allow no CA to issue wildcard certificate for this domain
-  CAA("@", "iodef", "mailto:CSO@Dicaire.com", CAA_CRITICAL)
-]
 
 var office365Services = [
     CNAME("smtp", "smtp.office365.com."),
@@ -150,8 +145,8 @@ var mediumCustomDomain = [
     A("blog", "52.4.145.119"),
     A("blog", "52.1.173.203"),
     A("blog", "52.1.147.205"),
-    A("blog", "52.1.119.170"),                
-    A("blog", "52.0.16.118"), 
+    A("blog", "52.1.119.170"),
+    A("blog", "52.0.16.118"),
     A("blog", "52.6.46.142"),
     CNAME("6b05fafa072b4760f19c659737547f2f.blog", "C70B252B0828913873E9D2FA4A427C28B1AAC5FD.comodoca.com.")
 ]
@@ -164,46 +159,52 @@ var localDevices = [
     A("phone","172.16.16.172"),
     A("robot", berlinIP + 1), 
     A("w3","127.0.0.1")
-]    
-    
-var defaultDomain = [
-    "coteleblanc.com",
-    "coteleblanc.name",
-    "dicai.re",
-    "dicairestrategies.com",
 ]
 
-var defaultDomainMX = [
-    "coteleblanc-com",
-    "coteleblanc-name",
-    "dicai-re",
-    "dicairestrategies-com",
+var defaultDomainName = [
+    "coteleblanc",
+    "coteleblanc",    
+    "dicai",
+    "dicairestrategies"
 ]
 
-for (index in defaultDomain) {
+var defaultDomainExtension = [
+    "com",
+    "name",    
+    "re",
+    "com"
+]
 
-    D( defaultDomain[index], REG_NONE, DnsProvider(R53), 
+for (index in defaultDomainName) {
+
+    D( defaultDomainName[index] + "." + defaultDomainExtension[index], REG_NONE, DnsProvider(R53), 
     DefaultTTL("5d"), 
-    MX("@", 5, defaultDomainMX[index] + ".mail.protection.outlook.com."),
+    MX("@", 5, defaultDomainName[index] + "-" + defaultDomainExtension[index] + ".mail.protection.outlook.com."),
+    certificates,
+    CAA("@", "iodef", "mailto:CSO@" + defaultDomainName[index] + "." + defaultDomainExtension[index], CAA_CRITICAL),    
     office365SPF,
-    office365Core,
-    CAA
-);
+    office365Core
+    );
 }
 
 D("infrax.com", REG_NONE, DnsProvider(R53),
     DefaultTTL("5d"), 
     MX("@", 5, "infrax-com.mail.protection.outlook.com."),
+    certificates,
+    CAA("@", "iodef", "mailto:CSO@" + "infrax.com", CAA_CRITICAL),
+    CAA("@", "issue", "letsencrypt.org"),    
     office365SPF,
     office365Core,
     localDevices,
     CNAME("f", "bucket.s3-" + s3Location + ".amazonaws.com."),
-    stage_subdomains
+    stageDublin
 );
 
 D("dstrategies.com", REG_NONE, DnsProvider(R53),
     DefaultTTL("10m"), 
     MX("@", 5, O365Tenant + ".mail.protection.outlook.com."),
+    certificates,
+    CAA("@", "iodef", "mailto:CSO@" + "dStrategies.com", CAA_CRITICAL),    
     office365SPF,
     office365Core,
     office365Services,
@@ -215,6 +216,9 @@ D("dstrategies.com", REG_NONE, DnsProvider(R53),
 D("bhdicaire.com", REG_NONE, DnsProvider(R53),
     DefaultTTL("10m"), 
     MX("@", 5, "bhdicaire-com.mail.protection.outlook.com."),
+    certificates,
+    CAA("@", "iodef", "mailto:CSO@" + "BHDicaire.com", CAA_CRITICAL), 
+    CAA("@", "issue", "comodoca.com"),   
     office365SPF,
     office365Core,
     mediumCustomDomain,
@@ -227,9 +231,11 @@ D("bhdicaire.com", REG_NONE, DnsProvider(R53),
 D("dicaire.com", REG_NONE, DnsProvider(R53),
     DefaultTTL("60m"), 
     MX("@", 5, "dicaire-com.mail.protection.outlook.com."),
-    TXT("_amazonses","AjQmDhp6xsdy+D+8v2ruK9cDXwxIPlUz5gKejYUwwGs="),
+    certificates,
+    CAA("@", "iodef", "mailto:CSO@" + "Dicaire.com", CAA_CRITICAL),    
     office365SPF,
     office365Core,
     office365Services,
-    gServices
+    gServices,
+    TXT("_amazonses","AjQmDhp6xsdy+D+8v2ruK9cDXwxIPlUz5gKejYUwwGs=")
 );
