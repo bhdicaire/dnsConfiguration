@@ -23,6 +23,7 @@ check:
 	~/go/bin/dnscontrol version
 	~/go/bin/dnscontrol check
 	python -m json.tool creds.json
+	~/go/bin/dnscontrol print-ir --out dnsConfig.json --pretty
 	git status
 	
 preview:
