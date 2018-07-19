@@ -3,7 +3,7 @@
 */
 
 var REG_NONE = NewRegistrar("none", "NONE");    // No registrar are currently automated
-var R53 = NewDnsProvider("r53_main", "ROUTE53");
+var r53 = NewDnsProvider("r53_main", "ROUTE53");
 
 var O365Tenant    = "DicaireStrategies-com";
 var berlinIP      = IP("10.10.10.40");
@@ -13,10 +13,24 @@ var s3Location    = "ca-central-1";
 var s3Location    = "ca-central-1";
 
 var nameServers = [
-  A("ns1.infrax.com", "205.251.193.2"), // ns-258.awsdns-32.com"
-  A("ns2.infrax.com", "205.251.194.175"), // ns-687.awsdns-21.net"
-  A("ns3.infrax.com", "205.251.196.163"), // ns-1187.awsdns-20.org
-  A("ns4.infrax.com", "205.251.198.41") // ns-1577.awsdns-05.co.uk
+
+  NAMESERVER("ns1"),
+  NAMESERVER("ns2"),
+  NAMESERVER("ns3"),
+  NAMESERVER("ns4"),
+  
+  A("ns1", "205.251.196.127"), // ns-1151.awsdns-15.org
+  AAAA("ns1", "2600:9000:5304:7f00::1"),
+ 
+  A("ns2", "205.251.194.117"), // ns-629.awsdns-14.net
+  AAAA("ns2", "2600:9000:5302:7500::1"),
+  
+  A("ns3", "205.251.192.192"), // ns-192.awsdns-24.com
+  AAAA("ns3", "2600:9000:5300:c000::1"),
+
+  A("ns4", "205.251.199.135"), // ns-1927.awsdns-48.co.uk
+  AAAA("ns4", "2600:9000:5307:8700::1"),  
+  {'ns_ttl': '600'} // On domain apex NS RRs
 ]
 
 var stageDublin = [];
@@ -227,8 +241,9 @@ var defaultDomainExtension = [
 
 for (index in defaultDomainName) {
 
-    D( defaultDomainName[index] + "." + defaultDomainExtension[index], REG_NONE, DnsProvider(R53), 
+    D( defaultDomainName[index] + "." + defaultDomainExtension[index], REG_NONE, DnsProvider(r53,0), 
     DefaultTTL("5d"), 
+    nameServers,
     MX("@", 5, defaultDomainName[index] + "-" + defaultDomainExtension[index] + ".mail.protection.outlook.com."),
     certificates,
     CAA("@", "iodef", "mailto:CSO@" + defaultDomainName[index] + "." + defaultDomainExtension[index], CAA_CRITICAL),    
@@ -237,8 +252,9 @@ for (index in defaultDomainName) {
     );
 }
 
-D("infrax.com", REG_NONE, DnsProvider(R53),
-    DefaultTTL("5d"), 
+D("infrax.com", REG_NONE, DnsProvider(r53,0), 
+    DefaultTTL("5d"),
+    nameServers,
     MX("@", 5, "infrax-com" + ".mail.protection.outlook.com."),
     certificates,
     CAA("@", "iodef", "mailto:CSO@" + "Infrax.com", CAA_CRITICAL),
@@ -246,12 +262,12 @@ D("infrax.com", REG_NONE, DnsProvider(R53),
     office365SPF,
     office365Core,
     localDevices,
-
     stageDublin
 );
 
-D("dstrategies.com", REG_NONE, DnsProvider(R53),
-    DefaultTTL("10m"), 
+D("dstrategies.com", REG_NONE, DnsProvider(r53,0), 
+    DefaultTTL("10m"), //
+    nameServers,
     MX("@", 5, "dstrategies-com" + ".mail.protection.outlook.com."),
     certificates,
     CAA("@", "iodef", "mailto:CSO@" + "dStrategies.com", CAA_CRITICAL),
@@ -263,9 +279,9 @@ D("dstrategies.com", REG_NONE, DnsProvider(R53),
     CNAME("www", "@")
 );
 
-D("4lcatraz.com", REG_NONE, DnsProvider(R53),
-    nameServers,
+D("4lcatraz.com", REG_NONE, DnsProvider(r53,0), 
     DefaultTTL("60m"), 
+    nameServers,
     MX("@", 5, "4lcatraz-com" + ".mail.protection.outlook.com."),
     certificates,
     CAA("@", "iodef", "mailto:CSO@" + "4lcatraz.com", CAA_CRITICAL),
@@ -275,8 +291,9 @@ D("4lcatraz.com", REG_NONE, DnsProvider(R53),
     CNAME("www", "@")
 );
 
-D("bhdicaire.com", REG_NONE, DnsProvider(R53),
+D("bhdicaire.com", REG_NONE, DnsProvider(r53,0), 
     DefaultTTL("10m"), 
+    nameServers,
     MX("@", 5, "bhdicaire-com" + ".mail.protection.outlook.com."),
     certificates,
     CAA("@", "iodef", "mailto:CSO@" + "BHDicaire.com", CAA_CRITICAL), 
@@ -290,8 +307,9 @@ D("bhdicaire.com", REG_NONE, DnsProvider(R53),
     CNAME("www", "@")
 );
 
-D("dicaire.com", REG_NONE, DnsProvider(R53),
-    DefaultTTL("60m"), 
+D("dicaire.com", REG_NONE, DnsProvider(r53,0), 
+    DefaultTTL("60m"),
+    nameServers,
     MX("@", 5, "dicaire-com" + ".mail.protection.outlook.com."),
     certificates,
     CAA("@", "iodef", "mailto:CSO@" + "Dicaire.com", CAA_CRITICAL),
