@@ -49,3 +49,6 @@ commitTicket:
 setup:
 	mkdir -p ${build_dir}
 	git clone${gitRepository} ${build_dir}
+	
+domain:
+	aws ...	${name}

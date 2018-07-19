@@ -8,7 +8,7 @@ Your DNS configuration is unique as your ecosystem. These are mine. [Fork this r
 
 I don't believe in security by obscurity and I :heart: Github.
 
-I can easily backup, and restore settings for my personal sites. Furthermore, I can share what I have learned and grab new tricks from the community. Don't expect too much, this is my opinionated DNS configuration for my own projects. 
+I can easily backup, and restore settings for my personal sites. Furthermore, I can share what I have learned and grab new tricks from the community. Don't expect too much, this is my [opinionated DNS configuration](https://stackexchange.github.io/dnscontrol/opinions) for my own projects. 
 ## Installation
 
 1. Install Golang with Homebrew: `brew update; brew install golang`
@@ -45,6 +45,26 @@ I can easily backup, and restore settings for my personal sites. Furthermore, I 
 	* **make push msg="add foo.com"**: git pull, git commit with message, and push update to providers
 	* **make push-ticket ticket=abcdef**: git pull, git commit with ticket number, and push update to providers
 
+Example workflow
+Here is an example series of commands that would be used to convert a zone. Lines that start with # are comments.
+
+# Note this command uses ">>" to append to dnsconfig.js.  Do
+# not use ">" as that will erase the existing file.
+convertzone -out=dsl foo.com <old/zone.foo.com >>dnsconfig.js
+#
+dnscontrol preview
+vim dnsconfig.js
+# (repeat these two commands until all warnings/errors are resolved)
+#
+# When everything is as you wish, push the changes live:
+dnscontrol push
+# (this should be a no-op)
+#
+# Make any changes you do desire:
+vim dnsconfig.js
+dnscontrol preview
+# (repeat until all warnings/errors are resolved)
+dnscontrol push
 ## Licence
 
 **dnsConfiguration** is [licensed by Benoît H. Dicaire under the MIT License](https://github.com/bhdicaire/dnsConfiguration/blob//master/LICENCE).
