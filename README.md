@@ -8,7 +8,10 @@ Your DNS configuration is unique as your ecosystem. These are mine. [Fork this r
 
 I don't believe in security by obscurity and I :heart: Github.
 
-I can easily backup, and restore settings for my personal sites. Furthermore, I can share what I have learned and grab new tricks from the community. Don't expect too much, this is my [opinionated DNS configuration](https://stackexchange.github.io/dnscontrol/opinions) for my own projects. 
+Don't expect too much, this is my [opinionated DNS configuration](https://stackexchange.github.io/dnscontrol/opinions) for my own projects. 
+
+I can easily backup, and restore settings for my personal sites. Furthermore, I can share what I have learned and grab new tricks from the community. Refer to my [documentation]((https://github.com/bhdicaire/dnsConfiguration/raw/master/vanityNameServers.md), how to setup vanity name servers on Route 53. I spent more time than I'd like to admit fon this topic.
+
 ## Installation
 
 1. Install Golang with Homebrew: `brew update; brew install golang`

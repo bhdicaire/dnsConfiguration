@@ -3,52 +3,128 @@
 ## Modified by: Benoît H. Dicaire
 ################################################
 
-all :	     preview 
-build:	     updateDNS
-debug:       pull check preview 
-test:        preview
-push:	     pull commit updateDNS
-push-ticket: pull commitTicket updateDNS
+all :	     banner help
+build:	     banner updateDNS
+debug:       banner pull qa preview 
+test:        banner preview
+push:	     banner pull gitCommit updateDNS
+archive: 	 banner pull gitArchive updateDNS
+   
 
-## Variables
-SHELL := /bin/bash
-build_dir := ~/Code/dnsConfiguration
-gitRepository := https://github.com/bhdicaire/dnsConfiguration
-configFile := dnsconfig.js
-dateStamp := $(shell date "+%Y%m%d")
+###############################################################################
 
-check:
-	which go
-	go version
-	~/go/bin/dnscontrol version
-	~/go/bin/dnscontrol check
+programName    := dnsConfiguration
+programVersion := 0.4
+programSource  := https://github.com/bhdicaire/dnsConfiguration
+modifiedBy     := Benoît H. Dicaire — BH@Dicaire.com
+
+SHELL          := /bin/bash
+makeLocation   := `which make`
+makeVersion    := `make -v|grep GNU`
+goLocation     := `which go`
+goVersion      := `go version`
+dnsControl     := ~/go/bin/dnscontrol
+dnsControlVersion := `~/go/bin/dnscontrol version`
+dateStamp      := $(shell date "+%Y%m%d")
+ 
+normalText     := "\033[0m"
+boldText       := "\033[1m"
+italicText     := "\033[3m"
+underlineText  := "\033[4m"
+redText        := "\033[31m"
+
+tab            := "\t"
+2tab            := "\t\t"
+tabNormal      := $(tab)$(normalText)
+tabBold        := $(tab)$(boldText)
+
+buildDir      := ~/Code/dnsConfiguration
+gitRepository  := https://github.com/bhdicaire/dnsConfiguration
+configFile     := dnsconfig.js
+
+###############################################################################
+
+.PHONY: qa	
+qa:
+	@echo -e $(tabNormal)GO Location:$(tabBold)$(2tab)$(goLocation)$(tabNormal)
+	@echo -e $(tabNormal)GO version:$(tabBold)$(2tab)$(goVersion)$(tabNormal)
+	@echo -e $(tabNormal)DNS Control version:$(tabBold)$(tab)$(dnsControlVersion)$(tabNormal)
+	@printf "\n###############################################################################\n\n"	
+	$(dnsControl) check
+	@printf "\n###############################################################################\n\n"	
 	python -m json.tool creds.json
-	~/go/bin/dnscontrol print-ir --out dnsConfig.json --pretty
+	@printf "\n###############################################################################\n\n"	
+	@printf "Generate JSON for debugging purpose: $(buildDir): dnsConfig.json\n"
+	@$(dnsControl) print-ir --out dnsConfig.json --pretty
+	@printf "\n###############################################################################\n\n"	
 	git status
-	
+	@printf "\n###############################################################################\n\n"	
+
 preview:
-	~/go/bin/dnscontrol preview
+	@printf "\n\n"
+	@$(dnsControl) preview
+	@printf "\n###############################################################################\n\n"	
     
 pull:
-	git pull
-	git status
+	@git pull
+	@printf "\n###############################################################################\n\n"	
+	@git status
+	@printf "\n###############################################################################\n\n"	
 
 updateDNS:
-	~/go/bin/dnscontrol push
+	@printf "\n\"
+	@$(dnsControl) push
+	@printf "\n\n"
 
-commit:
-	git add ${configFile}
-	git commit -m"Update #${dateStamp} ${configFile} — ${msg}"
-	git push
+.PHONY: gitArchive	
+gitArchive:
+	@printf "#\n# Archive data files\n#\n"
+	@mkdir -p archive
+	@cp $(configFile) archive/$(dateStamp)" "$(configFile)
+	@git add archive
+	@git commit -m"Update DNS configuration and archive — $(dateStamp)"
+	@git push
 
-commitTicket:
+gitCommit:
 	git add ${configFile}
-	git commit -m"Update DNS configurations with ticket #${ticket}"
+	ifdef ticket
+		git commit -m"Update DNS configurations with ticket #${ticket}"
+	endif
+	ifdef msg
+		git commit -m"Update #${dateStamp} ${configFile} — ${msg}"
+	else
+		@git commit -m"Update DNS configuration — $(dateStamp)"
+	endif
 	git push
 	
 setup:
-	mkdir -p ${build_dir}
-	git clone${gitRepository} ${build_dir}
+	@mkdir -p ${buildDir}
+	@git clone${gitRepository} ${buildDir}
+
+clean:
+	@rm dnsConfig.json
+	@rm -rf archive
 	
-domain:
-	aws ...	${name}
+banner:
+	@printf "\n\n"
+	@echo -e $(normalText)
+	@printf "###############################################################################\n\n"	
+	@echo -e "\t$(programName) — v$(programVersion)" $(italicText)"with" $(normalText)"$(makeVersion) [$(makeLocation)]\n"
+	@echo -e "\tsource:\t\t$(programSource)"
+	@printf "\tmodified by:\t$(modifiedBy)\n\n"
+	@printf "###############################################################################\n"	
+	
+help:
+	@echo -e $(boldText)
+	@printf "\tTarget\t\tFunction\n"
+	@echo -e $(normalText)
+	@printf "\tall\t\tThis information\n"
+	@printf "\tarchive\t\tArchive changes, and commit to Git\n"
+	@printf "\tbuild\t\tDeploy to DNS servers\n"
+	@printf "\tclean\t\tDelete the files generated by the application\n"
+	@printf "\tdebug\t\tTest your changes and the configuration\n"
+	@printf "\ttest\t\tTest your changes locally\n"
+	@printf "\tpush\t\tBuild and commit changes to Git, use msg=abc or ticket=123\n\n"
+
+resetText:
+	@echo -e $(normalText)	
