@@ -20,51 +20,27 @@ I can easily backup, and restore settings for my personal sites. Furthermore, I 
 	export PATH=$PATH:$GOPATH/bin
 	export PATH=$PATH:$GOROOT/bin
 ```
-
 4. Create your GO workspace: `mkdir -p $GOPATH $GOPATH/src $GOPATH/pkg $GOPATH/b`
 5. Download the source, compile it, and install DNSControl: `go get github.com/StackExchange/dnscontrol`
 6. Create your dnsControl repository: `mkdir -p ~/Code/dnsConfiguration`
 6. Clone my repository: `git clone https://github.com/bhdicaire/dnsConfiguration ~/Code/dnsConfiguration`
-7. Create your initial Router53 `creds.json` with your own credential:
-
-```
-  {
-     "r53_main":{
-     "KeyId": "abc123",
-     "SecretKey": "abc123"
-     }
-  }
-```
+7. Create your initial Router53 `creds.json` with your own credential, you can use `samples/credsExamples.json` to accelerate your setup
 8. Modify the `dnsconfig.js` with your provider and DNS zones settings:
 	* I'm currently using AWS Route53 and no registrar
 	* Refer to the [Documentation](https://stackexchange.github.io/dnscontrol/), especially the [service providers list](https://stackexchange.github.io/dnscontrol/provider-list) 
-9. You can use my Makefile to test and deploy the compiled configuration:
+	
+## Workflow
+
+1. Modify the configuration file with your favorite text editor
+2. Test your changes *locally* :
 	* **make test**: Read live configuration and identify changes to be made, without applying them
 	* **make debug**: git pull, check binary version and location, git status, and check dnsconfig.js & creds.json
-	* **make build**: push update to DNS providers
-	* **make push msg="add foo.com"**: git pull, git commit with message, and push update to providers
+3. Fix all all warnings/errors with your favorite text editor
+4. Deploy the compiled configuration to your dns servers with `make updateDNS`
+5. When everything is as you wish, push the change one more time and commit the change to Git:
+	*  **make push msg="add foo.com"**: git pull, git commit with message, and push update to providers
 	* **make push-ticket ticket=abcdef**: git pull, git commit with ticket number, and push update to providers
 
-Example workflow
-Here is an example series of commands that would be used to convert a zone. Lines that start with # are comments.
-
-# Note this command uses ">>" to append to dnsconfig.js.  Do
-# not use ">" as that will erase the existing file.
-convertzone -out=dsl foo.com <old/zone.foo.com >>dnsconfig.js
-#
-dnscontrol preview
-vim dnsconfig.js
-# (repeat these two commands until all warnings/errors are resolved)
-#
-# When everything is as you wish, push the changes live:
-dnscontrol push
-# (this should be a no-op)
-#
-# Make any changes you do desire:
-vim dnsconfig.js
-dnscontrol preview
-# (repeat until all warnings/errors are resolved)
-dnscontrol push
 ## Licence
 
 **dnsConfiguration** is [licensed by Benoît H. Dicaire under the MIT License](https://github.com/bhdicaire/dnsConfiguration/blob//master/LICENCE).
