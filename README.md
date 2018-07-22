@@ -37,13 +37,14 @@ I can easily backup, and restore settings for my personal sites. Furthermore, I 
 1. Modify the configuration file with your favorite text editor
 2. Test your changes *locally* :
 	* **make test**: Read live configuration and identify changes to be made, without applying them
-	* **make debug**: git pull, check binary version and location, git status, and check dnsconfig.js & creds.json
+	* **make debug**: All tests above and check dnsconfig.js & creds.json
 3. Fix all all warnings/errors with your favorite text editor
-4. Deploy the compiled configuration to your dns servers with `make updateDNS`
+4. Deploy the compiled configuration to your dns servers with `make build`
 5. When everything is as you wish, push the change one more time and commit the change to Git:
-	*  **make push msg="add foo.com"**: git pull, git commit with message, and push update to providers
-	* **make push-ticket ticket=abcdef**: git pull, git commit with ticket number, and push update to providers
-
+	* **make push**: git pull, git commit, and push update to DNS servers
+	*  **make push msg="add foo.com"**: git pull, git commit with message, and push update to DNS servers
+	* **make push ticket=abcdef**: git pull, git commit with ticket number, and push update to DNS servers
+	* **make archive**: git pull, copy current dnsconfig.js to archive, git commit, and push update to DNS servers
 ## Licence
 
 **dnsConfiguration** is [licensed by Benoît H. Dicaire under the MIT License](https://github.com/bhdicaire/dnsConfiguration/blob//master/LICENCE).
