@@ -35,8 +35,18 @@ I can easily backup, and restore settings for my personal sites. Furthermore, I 
 ## Workflow
 
 1. Modify the configuration file with your favorite text editor
+2. Identify the next step with `make help`:
+```
+	test		Read configuration and identify changes to be made, without applying them
+	debug		Run test above and check configuration
+	build		Deploy configuration to DNS servers
+	push		Build above and commit changes to Git, you may use msg=abc or ticket=123
+	archive		Build above, copy configuration to archive subfolder, and commit to Git
+	clean		Delete dnsConfig.json and archive subfolder
+	help		This information
+```
 2. Test your changes *locally* :
-	* `make test`: Read live configuration and identify changes to be made, without applying them
+	* `make test`: Read configuration and identify changes to be made, without applying them
 	* `make debug`: All tests above and check dnsconfig.js & creds.json
 3. Fix all all warnings/errors with your favorite text editor
 4. Deploy the compiled configuration to your dns servers with `make build`
