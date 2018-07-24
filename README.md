@@ -10,7 +10,7 @@ I don't believe in security by obscurity and I :heart: Github.
 
 Don't expect too much, this is my [opinionated DNS configuration](https://stackexchange.github.io/dnscontrol/opinions) for my own projects. 
 
-I can easily backup, and restore settings for my personal sites. Furthermore, I can share what I have learned and grab new tricks from the community. Refer to my [documentation](https://github.com/bhdicaire/dnsConfiguration/raw/master/vanityNameServers.md), how to setup vanity name servers on Route 53. I spent more time than I'd like to admit fon this topic.
+I can easily backup, and restore settings for my personal sites. Furthermore, I can share what I have learned and grab new tricks from the community. Refer to my [documentation](https://github.com/bhdicaire/dnsConfiguration/raw/master/vanityNameServers.md), to setup vanity name servers on Route 53 — I spent more time than I'd like to admit on this topic.
 
 ## Installation
 
@@ -18,10 +18,10 @@ I can easily backup, and restore settings for my personal sites. Furthermore, I 
 2. Validate GO version and location (DNSControl can be built with Go version 1.7 or higher): `which go;go version`
 3. Ensure the environment variables are adequate (DNSControl will be installed in $GOPATH/bin):
 ```
-	export GOPATH=$HOME/go
-	export GOROOT=/usr/local/opt/go/libexec
-	export PATH=$PATH:$GOPATH/bin
-	export PATH=$PATH:$GOROOT/bin
+export GOPATH=$HOME/go
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
 ```
 4. Create your GO workspace: `mkdir -p $GOPATH $GOPATH/src $GOPATH/pkg $GOPATH/b`
 5. Download the source, compile it, and install DNSControl: `go get github.com/StackExchange/dnscontrol`
@@ -61,4 +61,4 @@ help		This information
 [![Google Group chat](https://img.shields.io/badge/google%20group-chat-green.svg)](https://groups.google.com/forum/#!forum/dnscontrol-discuss)
 
 * [Introducing DNS Control](https://blog.serverfault.com/2017/04/11/introducing-dnscontrol-dns-as-code-has-arrived/) and the [USENIX presentation](https://www.usenix.org/conference/srecon17americas/program/presentation/peterson)
-* Github source repository: [StackExchange/dnscontrol](https://github.com/)
+* Github source repository: [StackExchange/dnscontrol](https://github.com/StackExchange/dnscontrol)
