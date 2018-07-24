@@ -10,7 +10,7 @@ I don't believe in security by obscurity and I :heart: Github.
 
 Don't expect too much, this is my [opinionated DNS configuration](https://stackexchange.github.io/dnscontrol/opinions) for my own projects. 
 
-I can easily backup, and restore settings for my personal sites. Furthermore, I can share what I have learned and grab new tricks from the community. Refer to my [documentation](https://github.com/bhdicaire/dnsConfiguration/raw/master/vanityNameServers.md), to setup vanity name servers on Route 53 — I spent more time than I'd like to admit on this topic.
+I can easily backup, and restore settings for my personal sites. Furthermore, I can share what I have learned and grab new tricks from the community. Refer to my [documentation](https://github.com/bhdicaire/dnsConfiguration/blob/master/vanityNameServers.md), to setup vanity name servers on Route 53 — I spent more time than I'd like to admit on this topic.
 
 ## Installation
 
