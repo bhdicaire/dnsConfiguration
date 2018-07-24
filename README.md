@@ -37,13 +37,13 @@ I can easily backup, and restore settings for my personal sites. Furthermore, I 
 1. Modify the configuration file with your favorite text editor
 2. Identify the next step with `make help`:
 ```
-	test		Read configuration and identify changes to be made, without applying them
-	debug		Run test above and check configuration
-	build		Deploy configuration to DNS servers
-	push		Build above and commit changes to Git, you may use msg=abc or ticket=123
-	archive		Build above, copy configuration to archive subfolder, and commit to Git
-	clean		Delete dnsConfig.json and archive subfolder
-	help		This information
+test		Read configuration and identify changes to be made, without applying them
+debug		Run test above and check configuration
+build		Deploy configuration to DNS servers
+push		Build above and commit changes to Git, you may use msg=abc or ticket=123
+archive		Build above, copy configuration to archive subfolder, and commit to Git
+clean		Delete dnsConfig.json and archive subfolder
+help		This information
 ```
 3. Test your changes with `make test` or use `make debug` if you're stuck
 4. Fix all all warnings/ errors with your favorite text editor
@@ -52,13 +52,13 @@ I can easily backup, and restore settings for my personal sites. Furthermore, I 
 	* `make push` or `make push msg="Add Dicaire.com"` or `make push ticket=A123456`
 7. Close your change management ticket :grin:
 ## Licence
-StackExchange/dnscontrol is [Copyright (c) 2015 Stack Overflow and licensed under the MIT licence](https://github.com/StackExchange/dnscontrol/blob/master/LICENSE).
+**DNS Control** is [Copyright 2015 Stack Overflow and licensed under the MIT licence](https://github.com/StackExchange/dnscontrol/blob/master/LICENSE).
 
-**dnsConfiguration** is [Copyright (c) 2018 Benoît H. Dicaire and licensed under the MIT licence](https://github.com/bhdicaire/dnsConfiguration/blob//master/LICENCE).
+**dnsConfiguration** is [Copyright 2018 Benoît H. Dicaire and licensed under the MIT licence](https://github.com/bhdicaire/dnsConfiguration/blob//master/LICENCE).
 
 ## DNS Control ressources
 [![Gitter chat](https://badges.gitter.im/dnscontrol/Lobby.png)](https://gitter.im/dnscontrol/Lobby)
 [![Google Group chat](https://img.shields.io/badge/google%20group-chat-green.svg)](https://groups.google.com/forum/#!forum/dnscontrol-discuss)
 
 * [Introducing DNS Control](https://blog.serverfault.com/2017/04/11/introducing-dnscontrol-dns-as-code-has-arrived/) and the [USENIX presentation](https://www.usenix.org/conference/srecon17americas/program/presentation/peterson)
-* [Source repository](https://github.com/StackExchange/dnscontrol)
+* Github source repository: [StackExchange/dnscontrol](https://github.com/)
