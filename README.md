@@ -1,4 +1,4 @@
-![alt text](https://github.com/bhdicaire/dnsConfiguration/raw/master/img/logo.png "Logo")
+![alt text](https://github.com/bhdicaire/dnsConfiguration/raw/master/logo.png "Logo")
 
 I was tired of handling zone files. DNS Management is hard, especially if you manage tons of records with several registrars and many DNS providers. I manage DNS configuration with [StackOverflow's DNSControl](https://stackexchange.github.io/dnscontrol/) and Git.
 
