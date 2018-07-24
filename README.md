@@ -10,7 +10,7 @@ I don't believe in security by obscurity and I :heart: Github.
 
 Don't expect too much, this is my [opinionated DNS configuration](https://stackexchange.github.io/dnscontrol/opinions) for my own projects. 
 
-I can easily backup, and restore settings for my personal sites. Furthermore, I can share what I have learned and grab new tricks from the community. Refer to my [documentation]((https://github.com/bhdicaire/dnsConfiguration/raw/master/vanityNameServers.md), how to setup vanity name servers on Route 53. I spent more time than I'd like to admit fon this topic.
+I can easily backup, and restore settings for my personal sites. Furthermore, I can share what I have learned and grab new tricks from the community. Refer to my [documentation](https://github.com/bhdicaire/dnsConfiguration/raw/master/vanityNameServers.md), how to setup vanity name servers on Route 53. I spent more time than I'd like to admit fon this topic.
 
 ## Installation
 
@@ -27,10 +27,10 @@ I can easily backup, and restore settings for my personal sites. Furthermore, I 
 5. Download the source, compile it, and install DNSControl: `go get github.com/StackExchange/dnscontrol`
 6. Create your dnsControl repository: `mkdir -p ~/Code/dnsConfiguration`
 6. Clone my repository: `git clone https://github.com/bhdicaire/dnsConfiguration ~/Code/dnsConfiguration`
-7. Create your initial Router53 `creds.json` with your own credential, you can use `samples/credsExamples.json` to accelerate your setup
+7. Create your initial `creds.json` with your own credential, you can use `samples/creds.json` to accelerate your setup
 8. Modify the `dnsconfig.js` with your provider and DNS zones settings:
-	* I'm currently using AWS Route53 and no registrar
-	* Refer to the [Documentation](https://stackexchange.github.io/dnscontrol/), especially the [service providers list](https://stackexchange.github.io/dnscontrol/provider-list) 
+	* I'm currently using [AWS Route53 as service provider](https://stackexchange.github.io/dnscontrol/provider-list) and no registrar
+	* Refer to the [Documentation](https://stackexchange.github.io/dnscontrol/) for the language spec
 	
 ## Workflow
 
@@ -45,16 +45,11 @@ I can easily backup, and restore settings for my personal sites. Furthermore, I 
 	clean		Delete dnsConfig.json and archive subfolder
 	help		This information
 ```
-2. Test your changes *locally* :
-	* `make test`: Read configuration and identify changes to be made, without applying them
-	* `make debug`: All tests above and check dnsconfig.js & creds.json
-3. Fix all all warnings/errors with your favorite text editor
-4. Deploy the compiled configuration to your dns servers with `make build`
-5. When everything is as you wish, push the change one more time and commit the change to Git:
-	* `make push`: git pull, git commit, and push update to DNS servers
-	*  `make push msg="add foo.com"`: git pull, git commit with message, and push update to DNS servers
-	* `make push ticket=abcde`: git pull, git commit with ticket number, and push update to DNS servers
-	* `make archive`: git pull, copy current dnsconfig.js to archive, git commit, and push update to DNS servers
+3. Test your changes: `make test` or `make debug` if you're stuck
+4. Fix all all warnings/errors with your favorite text editor
+5. Deploy the compiled configuration to your dns servers with `make build`
+5. When everything is as you wish, push the change one more time and commit the change to Git: `make push msg="Add Dicaire.com"
+6. Close your change management ticket :grin:
 ## Licence
 
 **dnsConfiguration** is [licensed by Benoît H. Dicaire under the MIT License](https://github.com/bhdicaire/dnsConfiguration/blob//master/LICENCE).
