@@ -7,9 +7,8 @@ all :	     banner help
 build:	     banner updateDNS
 debug:       banner pull qa preview 
 test:        banner preview
-push:	     banner pull gitCommit updateDNS
+push:	     banner pull triage gitCommit updateDNS
 archive: 	 banner pull gitArchive updateDNS
-   
 
 ###############################################################################
 
@@ -44,6 +43,20 @@ configFile     := dnsconfig.js
 
 ###############################################################################
 
+setup:
+	@mkdir -p ${buildDir}
+	@git clone${gitRepository} ${buildDir}
+
+clean:
+	@rm dnsConfig.json
+	@rm -rf archive
+
+pull:
+	@git pull
+	@printf "\n###############################################################################\n\n"	
+	@git status
+	@printf "\n###############################################################################\n\n"	
+
 .PHONY: qa	
 qa:
 	@echo -e $(tabNormal)GO Location:$(tabBold)$(2tab)$(goLocation)$(tabNormal)
@@ -65,16 +78,24 @@ preview:
 	@$(dnsControl) preview
 	@printf "\n###############################################################################\n\n"	
     
-pull:
-	@git pull
-	@printf "\n###############################################################################\n\n"	
-	@git status
-	@printf "\n###############################################################################\n\n"	
-
 updateDNS:
 	@printf "\n\"
 	@$(dnsControl) push
 	@printf "\n\n"
+
+triage:
+ifdef ticket
+gitMsg = "Update DNS configurations with ticket \#"$(ticket)
+else ifdef msg
+gitMsg = "Update "${dateStamp} ${configFile}" — "$(msg)
+else
+gitMsg = "Update DNS configuration — "$(dateStamp)
+endif
+
+gitCommit:
+	git add ${configFile}
+	git commit -m$(gitMsg)
+	git push
 
 .PHONY: gitArchive	
 gitArchive:
@@ -85,26 +106,6 @@ gitArchive:
 	@git commit -m"Update DNS configuration and archive — $(dateStamp)"
 	@git push
 
-gitCommit:
-	git add ${configFile}
-	ifdef ticket
-		git commit -m"Update DNS configurations with ticket #${ticket}"
-	endif
-	ifdef msg
-		git commit -m"Update #${dateStamp} ${configFile} — ${msg}"
-	else
-		@git commit -m"Update DNS configuration — $(dateStamp)"
-	endif
-	git push
-	
-setup:
-	@mkdir -p ${buildDir}
-	@git clone${gitRepository} ${buildDir}
-
-clean:
-	@rm dnsConfig.json
-	@rm -rf archive
-	
 banner:
 	@printf "\n\n"
 	@echo -e $(normalText)
