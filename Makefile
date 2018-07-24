@@ -36,7 +36,7 @@ configFile        := dnsconfig.js
 
 clean: banner
 	@echo -e  $(boldText)"\n##########" $(tab)Remove dnsConfig.json and archive subFolder"\n"$(normalText)
-	@$(RM) dnsConfig.json
+	@$(RM) dnsConfig.json spfcache.json
 	@$(RM) -r archive
 	@printf "\n\n"	
 
