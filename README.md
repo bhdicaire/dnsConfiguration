@@ -45,17 +45,20 @@ I can easily backup, and restore settings for my personal sites. Furthermore, I 
 	clean		Delete dnsConfig.json and archive subfolder
 	help		This information
 ```
-3. Test your changes: `make test` or `make debug` if you're stuck
-4. Fix all all warnings/errors with your favorite text editor
+3. Test your changes with `make test` or use `make debug` if you're stuck
+4. Fix all all warnings/ errors with your favorite text editor
 5. Deploy the compiled configuration to your dns servers with `make build`
-5. When everything is as you wish, push the change one more time and commit the change to Git: `make push msg="Add Dicaire.com"
-6. Close your change management ticket :grin:
+6. When everything is *perfect*, deploy the change one more time and commit the change to Git:
+	* `make push` or `make push msg="Add Dicaire.com"` or `make push ticket=A123456`
+7. Close your change management ticket :grin:
 ## Licence
+StackExchange/dnscontrol is [Copyright (c) 2015 Stack Overflow and licensed under the MIT licence](https://github.com/StackExchange/dnscontrol/blob/master/LICENSE).
 
-**dnsConfiguration** is [licensed by Benoît H. Dicaire under the MIT License](https://github.com/bhdicaire/dnsConfiguration/blob//master/LICENCE).
+**dnsConfiguration** is [Copyright (c) 2018 Benoît H. Dicaire and licensed under the MIT licence](https://github.com/bhdicaire/dnsConfiguration/blob//master/LICENCE).
 
-## Ressources
+## DNS Control ressources
+[![Gitter chat](https://badges.gitter.im/dnscontrol/Lobby.png)](https://gitter.im/dnscontrol/Lobby)
+[![Google Group chat](https://img.shields.io/badge/google%20group-chat-green.svg)](https://groups.google.com/forum/#!forum/dnscontrol-discuss)
 
 * [Introducing DNS Control](https://blog.serverfault.com/2017/04/11/introducing-dnscontrol-dns-as-code-has-arrived/) and the [USENIX presentation](https://www.usenix.org/conference/srecon17americas/program/presentation/peterson)
 * [Source repository](https://github.com/StackExchange/dnscontrol)
-* Support: [Gitter](https://gitter.im/dnscontrol/Lobby), and [Google Groups](https://groups.google.com/forum/#!forum/dnscontrol-discuss)
