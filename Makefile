@@ -6,9 +6,9 @@ test:        banner preview
 ###############################################################################
 
 programName       := dnsConfiguration
-programVersion    := 0.4
+programVersion    := 0.5
 programSource     := https://github.com/bhdicaire/dnsConfiguration
-modifiedBy        := Benoît H. Dicaire — BH@Dicaire.com
+modifiedBy        := BH Dicaire — Code@BHDicaire.com
 
 SHELL             := /bin/bash
 RM                := /bin/rm -f
