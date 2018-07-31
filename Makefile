@@ -34,13 +34,14 @@ configFile        := dnsconfig.js
 
 ###############################################################################
 
+.PHONY: debug gitArchive
+
 clean: banner
 	@echo -e  $(boldText)"\n##########" $(tab)Remove dnsConfig.json and archive subFolder"\n"$(normalText)
 	@$(RM) dnsConfig.json spfcache.json
 	@$(RM) -r archive
 	@printf "\n\n"	
 
-.PHONY: debug	
 debug:
 	@clear
 	@$(MAKE) banner
@@ -78,7 +79,6 @@ gitCommit:
 	git push
 	@printf "\n\n"
 
-.PHONY: gitArchive	
 gitArchive:
 	$(MAKE) banner
 	$(MAKE) pull
