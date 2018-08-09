@@ -8,7 +8,7 @@ var r53 = NewDnsProvider("r53_main", "ROUTE53");
 var O365Tenant    = "DicaireStrategies-com";
 var berlinIP      = IP("10.10.10.40");
 var dublinSubnet  = IP("10.10.100.");
-var s3Location    = "ca-central-1"; 
+var s3Location    = "ca-central-1";
 
 var s3Location    = "ca-central-1";
 
@@ -18,18 +18,18 @@ var nameServers = [
   NAMESERVER("ns2"),
   NAMESERVER("ns3"),
   NAMESERVER("ns4"),
-  
+
   A("ns1", "205.251.196.127"), // ns-1151.awsdns-15.org
   AAAA("ns1", "2600:9000:5304:7f00::1"),
- 
+
   A("ns2", "205.251.194.117"), // ns-629.awsdns-14.net
   AAAA("ns2", "2600:9000:5302:7500::1"),
-  
+
   A("ns3", "205.251.192.192"), // ns-192.awsdns-24.com
   AAAA("ns3", "2600:9000:5300:c000::1"),
 
   A("ns4", "205.251.199.135"), // ns-1927.awsdns-48.co.uk
-  AAAA("ns4", "2600:9000:5307:8700::1"),  
+  AAAA("ns4", "2600:9000:5307:8700::1"),
   {'ns_ttl': '600'} // On domain apex NS RRs
 ]
 
@@ -76,7 +76,7 @@ var office365Services = [
     CNAME("mail", "outlook.office365.com."),
     CNAME("imap", "outlook.office365.com."),
     CNAME("pop3", "outlook.office365.com."),
-    
+
     CNAME("m", "outlook.office365.com."),
     CNAME("outlook", "outlook.office365.com."),
 
@@ -89,11 +89,11 @@ var office365Services = [
     CNAME("teams", "teams.microsoft.com."),
     CNAME("view", "view.officeapps.live.com."),
     CNAME("visio", "visio.officeapps.live.com."),
-    CNAME("word", "word-edit.officeapps.live.com."),        
+    CNAME("word", "word-edit.officeapps.live.com."),
     CNAME("oneNote", "www.onenote.com."),
     CNAME("Tasks", "tasks.office.com."),
     CNAME("Sway", "sway.com."),
-    
+
     CNAME("agent", "agent.office.net."),
     CNAME("becws", "becws.microsoftonline.com."),
     CNAME("broadcast", "broadcast.officeapps.live.com."),
@@ -128,7 +128,7 @@ var office365Services = [
     CNAME("my-files", O365Tenant + "-myfiles.sharepoint.com."),
     CNAME("my-sharepoint", O365Tenant + "-my.sharepoint.com."),
     CNAME("sharepoint", O365Tenant + ".sharepoint.com."),
-        
+
     CNAME("autologon", "autologon.microsoftazuread-sso.com."),
     CNAME("login-API", "api.login.microsoftonline.com."),
     CNAME("login-p", "login.microsoftonline-p.com."),
@@ -136,7 +136,7 @@ var office365Services = [
     CNAME("login", "login.microsoftonline.com."),
     CNAME("loginCERT", "logincert.microsoftonline.com."),
     CNAME("loginEX", "loginex.microsoftonline.com."),
-    CNAME("loginMS", "login.microsoft.com."),    
+    CNAME("loginMS", "login.microsoft.com."),
     CNAME("loginO365", "login.microsoftonline.com."),
     CNAME("loginWin", "login.windows.net."),
     CNAME("passwordReset-API", "api.passwordreset.microsoftonline.com."),
@@ -160,41 +160,41 @@ var gServices = [
 
 var awsRegions = [
     CNAME("aws-ap-northeast-2","ap-northeast-2.amazonaws.com."),
-    CNAME("aws-ap-northeast-3","ap-northeast-3.amazonaws.com."),    
+    CNAME("aws-ap-northeast-3","ap-northeast-3.amazonaws.com."),
     CNAME("aws-ap-northeast","ap-northeast-1.amazonaws.com."),
     CNAME("aws-osaka","ap-northeast-3.amazonaws.com."),
     CNAME("aws-ap-south","ap-south-1.amazonaws.com."),
     CNAME("aws-ap-southeast-2","ap-southeast-2.amazonaws.com."),
-    CNAME("aws-ap-southeast","ap-southeast-1.amazonaws.com."),    
+    CNAME("aws-ap-southeast","ap-southeast-1.amazonaws.com."),
     CNAME("aws-beijing","cn-north-1.amazonaws.com.cn."),
     CNAME("aws-ca","ca-central-1.amazonaws.com."),
     CNAME("aws-california","us-west-1.amazonaws.com."),
     CNAME("aws-cn-north","cn-north-1.amazonaws.com.cn."),
-    CNAME("aws-china","cn-north-1.amazonaws.com.cn."),    
+    CNAME("aws-china","cn-north-1.amazonaws.com.cn."),
     CNAME("aws-cn-northwest","cn-northwest-1.amazonaws.com.cn."),
     CNAME("aws-eu-central","eu-central-1.amazonaws.com."),
     CNAME("aws-eu-west-2","eu-west-2.amazonaws.com."),
     CNAME("aws-eu-west-3","eu-west-3.amazonaws.com."),
-    CNAME("aws-eu-west","eu-west-1.amazonaws.com."),   
-    CNAME("aws-ireland","eu-west-1.amazonaws.com."),         
-    CNAME("aws-london","eu-west-2.amazonaws.com."),   
-    CNAME("aws-mtl","ca-central-1.amazonaws.com."), 
+    CNAME("aws-eu-west","eu-west-1.amazonaws.com."),
+    CNAME("aws-ireland","eu-west-1.amazonaws.com."),
+    CNAME("aws-london","eu-west-2.amazonaws.com."),
+    CNAME("aws-mtl","ca-central-1.amazonaws.com."),
     CNAME("aws-mumbai","ap-south-1.amazonaws.com."),
-    CNAME("aws-ningxia","cn-northwest-1.amazonaws.com.cn."),    
-    CNAME("aws-ohio","us-east-2.amazonaws.com."),    
-    CNAME("aws-paris","eu-west-3.amazonaws.com."), 
+    CNAME("aws-ningxia","cn-northwest-1.amazonaws.com.cn."),
+    CNAME("aws-ohio","us-east-2.amazonaws.com."),
+    CNAME("aws-paris","eu-west-3.amazonaws.com."),
     CNAME("aws-sa-east","sa-east-1.amazonaws.com."),
     CNAME("aws-saopaulo","sa-east-1.amazonaws.com."),
     CNAME("aws-seoul","ap-northeast-2.amazonaws.com."),
     CNAME("aws-singapore","ap-southeast-1.amazonaws.com."),
     CNAME("aws-sydney","ap-southeast-2.amazonaws.com."),
-    CNAME("aws-tokyo","ap-northeast-1.amazonaws.com."),    
+    CNAME("aws-tokyo","ap-northeast-1.amazonaws.com."),
     CNAME("aws-us-east-2","us-east-2.amazonaws.com."),
     CNAME("aws-us-east","us-east-1.amazonaws.com."),
     CNAME("aws-us-west-2","us-west-2.amazonaws.com."),
-    CNAME("aws-oregon","us-west-2.amazonaws.com."),    
+    CNAME("aws-oregon","us-west-2.amazonaws.com."),
     CNAME("aws-us-west","us-west-1.amazonaws.com."),
-    CNAME("aws-us","us-east-1.amazonaws.com."), 
+    CNAME("aws-us","us-east-1.amazonaws.com."),
     CNAME("aws-virginia","us-east-1.amazonaws.com."),
     CNAME("aws","ca-central-1.amazonaws.com.")
 ]
@@ -215,57 +215,68 @@ var mediumCustomDomain = [
     CNAME("6b05fafa072b4760f19c659737547f2f.blog", "C70B252B0828913873E9D2FA4A427C28B1AAC5FD.comodoca.com.")
 ]
 
+var corporate = [
+    CNAME("psa","psa-hub.ent.cgi.com."),
+    CNAME("workspace","qcap.ent.cginet."),
+    CNAME("webm","mail1.cgiclients.com."),
+    CNAME("sync","ActiveSync.CGI.com."),
+    CNAME("gw","Sera.CGI.com."),
+    CNAME("intranet","portal.ent.cgi.com."),
+    CNAME("2fa","Member2FA.UA.CGI.com.")
+]
+
 var localDevices = [
     A("edge", berlinIP),
     A("fw","172.16.16.1"),
     A("hplaser","172.16.16.100"),
     A("mediaz","172.16.16.216"),
     A("phone","172.16.16.172"),
-    A("robot", berlinIP + 1), 
+    A("robot", berlinIP + 1),
     A("w3","127.0.0.1")
 ]
 
 var defaultDomainName = [
     "coteleblanc",
-    "coteleblanc",    
+    "coteleblanc",
     "dicai",
     "dicairestrategies"
 ]
 
 var defaultDomainExtension = [
     "com",
-    "name",    
+    "name",
     "re",
     "com"
 ]
 
 for (index in defaultDomainName) {
 
-    D( defaultDomainName[index] + "." + defaultDomainExtension[index], REG_NONE, DnsProvider(r53,0), 
-    DefaultTTL("5d"), 
+    D( defaultDomainName[index] + "." + defaultDomainExtension[index], REG_NONE, DnsProvider(r53,0),
+    DefaultTTL("5d"),
     nameServers,
     MX("@", 5, defaultDomainName[index] + "-" + defaultDomainExtension[index] + ".mail.protection.outlook.com."),
     certificates,
-    CAA("@", "iodef", "mailto:CSO@" + defaultDomainName[index] + "." + defaultDomainExtension[index], CAA_CRITICAL),    
+    CAA("@", "iodef", "mailto:CSO@" + defaultDomainName[index] + "." + defaultDomainExtension[index], CAA_CRITICAL),
     office365SPF,
     office365Core
     );
 }
 
-D("infrax.com", REG_NONE, DnsProvider(r53,0), 
+D("infrax.com", REG_NONE, DnsProvider(r53,0),
     DefaultTTL("5d"),
     nameServers,
     MX("@", 5, "infrax-com" + ".mail.protection.outlook.com."),
     certificates,
     CAA("@", "iodef", "mailto:CSO@" + "Infrax.com", CAA_CRITICAL),
-    CAA("@", "issue", "letsencrypt.org"),    
+    CAA("@", "issue", "letsencrypt.org"),
     office365SPF,
     office365Core,
+    corporate,
     localDevices,
     stageDublin
 );
 
-D("dstrategies.com", REG_NONE, DnsProvider(r53,0), 
+D("dstrategies.com", REG_NONE, DnsProvider(r53,0),
     DefaultTTL("10m"), //
     nameServers,
     MX("@", 5, "dstrategies-com" + ".mail.protection.outlook.com."),
@@ -279,8 +290,8 @@ D("dstrategies.com", REG_NONE, DnsProvider(r53,0),
     CNAME("www", "@")
 );
 
-D("4lcatraz.com", REG_NONE, DnsProvider(r53,0), 
-    DefaultTTL("60m"), 
+D("4lcatraz.com", REG_NONE, DnsProvider(r53,0),
+    DefaultTTL("60m"),
     nameServers,
     MX("@", 5, "4lcatraz-com" + ".mail.protection.outlook.com."),
     certificates,
@@ -291,13 +302,13 @@ D("4lcatraz.com", REG_NONE, DnsProvider(r53,0),
     CNAME("www", "@")
 );
 
-D("bhdicaire.com", REG_NONE, DnsProvider(r53,0), 
-    DefaultTTL("10m"), 
+D("bhdicaire.com", REG_NONE, DnsProvider(r53,0),
+    DefaultTTL("10m"),
     nameServers,
     MX("@", 5, "bhdicaire-com" + ".mail.protection.outlook.com."),
     certificates,
-    CAA("@", "iodef", "mailto:CSO@" + "BHDicaire.com", CAA_CRITICAL), 
-    CAA("@", "issue", "comodoca.com"),   
+    CAA("@", "iodef", "mailto:CSO@" + "BHDicaire.com", CAA_CRITICAL),
+    CAA("@", "issue", "comodoca.com"),
     office365SPF,
     office365Core,
     mediumCustomDomain,
@@ -307,7 +318,7 @@ D("bhdicaire.com", REG_NONE, DnsProvider(r53,0),
     CNAME("www", "@")
 );
 
-D("dicaire.com", REG_NONE, DnsProvider(r53,0), 
+D("dicaire.com", REG_NONE, DnsProvider(r53,0),
     DefaultTTL("60m"),
     nameServers,
     MX("@", 5, "dicaire-com" + ".mail.protection.outlook.com."),
