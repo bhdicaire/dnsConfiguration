@@ -1,4 +1,5 @@
 ![logo](./logo.png)
+
 I was tired of handling zone files. DNS Management is hard, especially if you manage tons of records with several registrars and many DNS providers. I manage DNS configuration with [StackOverflow's DNSControl](https://stackexchange.github.io/dnscontrol/) and Git.
 
 Your DNS configuration is unique as your ecosystem. These are mine. [Fork this repository](https://github.com/bhdicaire/dnsConfiguration/fork) and make it your own.
@@ -41,21 +42,6 @@ Refer to `lib/example.js`,
 * [What is my IP](https://www.whatismyip.com/)
 * [API to get your public IP in JSon](https://api.ipgeolocation.io/getip)
 
-dnssec:
-	@#https://dnssec-analyzer.verisignlabs.com/gologique.ca
-	@#https://dnsviz.net/d/gologique.ca/analyze/
-	@#https://www.cyberciti.biz/faq/unix-linux-test-and-validate-dnssec-using-dig-command-line/
-	dig gologique.ca +dnssec +short
-	@printf "\n\n"
-	dig gologique.ca +dnssec +multi
-	@printf "\n\n"
-	dig DS gologique.ca +trace @1.1.1.1
-	@printf "\n\n"
-	delv gologique.ca
-
-https://github.com/gbe0/dnscontrol-office365
-
-Usage
 Check that your provider is supported!
 Click on "Use this Template" to make a copy of this repository
 Update dnscontrol.js to use your provider and include your domain records (using the migration guide linked below)
