@@ -4,6 +4,11 @@ D('example.org', REG_NONE, DnsProvider(cloudFlare),     // domains that do not s
     TXT('*._domainkey', "v=DKIM1; p="), // absence of a selector / public key (e.g. as a result of deleting the entire DKIM resource record) is semantically equal to a resource record with an empty public key
     TXT('_dmarc', "v=DMARC1;p=reject;sp=reject;adkim=s;aspf=s;"),
 
+// CAA https://en.wikipedia.org/wiki/DNS_Certification_Authority_Authorization
+// https://docs.dnscontrol.org/language-reference/domain-modifiers/caa
+    CAA("@", "issue", ";"),
+    CAA("@", "issuewild", ";"),   // Allow no CA to issue wildcard certificate for this domain
+
     AAAA("@", '2001:DB8::1', cfProxy),
     CF_TEMP_REDIRECT("example.org/*", "https://example.com/$1")
 
