@@ -41,6 +41,9 @@ build: banner ## Push the update to the nameservers
 	@$(dnsControl) push
 	@printf "\n\n"
 
+extract:  ## Injecrt secret
+	dnscontrol get-zone --format=js --out=fastmail-com.js cloudFlare - fastmail.com
+
 secret:  ## Inject secret via 1Password
 	op inject -i ./lib/creds.json.tpl -o creds.json
 
